@@ -8,6 +8,7 @@ class Atividade {
 	Date dataInicio
 	Date dataFim
 	Integer percentualConcluido
+	Projeto projeto
 	Usuario usuario
 	SituacaoAtividade situacaoAtividade
 
