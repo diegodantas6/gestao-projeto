@@ -1,10 +1,11 @@
 package br.com.gestaoProjeto
 
 import grails.converters.JSON
+import grails.plugin.springsecurity.annotation.Secured
 import br.com.teste.enums.NotifyType
 import br.com.teste.utils.UtilsMensagem
 
-
+@Secured("IS_AUTHENTICATED_ANONYMOUSLY")
 class SituacaoProjetoController {
 
 	def index() {
@@ -14,7 +15,7 @@ class SituacaoProjetoController {
 
 		def lista = SituacaoProjeto.createCriteria().list{ order("nome") }
 
-		render(template: "lista", model:[situacaoProjetos: lista])
+		render(template: "lista", model:[lista: lista])
 	}
 
 	def incluir() {
@@ -46,7 +47,7 @@ class SituacaoProjetoController {
 
 			if (old.version.toLong() > params.situacaoProjeto.version.toLong()) {
 
-				retorno = UtilsMensagem.getMensagem("O situacaoProjeto já foi alterado por outro usuário!\nFavor canecelar esta operação e tentar novamente!", NotifyType.ERROR)
+				retorno = UtilsMensagem.getMensagem("A situação projeto já foi alterado por outro usuário!\nFavor canecelar esta operação e tentar novamente!", NotifyType.ERROR)
 
 				render retorno as JSON
 
