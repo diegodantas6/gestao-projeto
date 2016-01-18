@@ -21,7 +21,7 @@
 		<div class="box box-primary" id="divFormLista">
 
 			<div class="box-header with-border">
-				<h1 class="box-title">Situações Projeto</h1>
+				<h1 class="box-title">Lista</h1>
 				<button type="submit" onclick="javascript: incluir()"
 					class="btn btn-primary pull-right">Novo</button>
 			</div>
