@@ -169,10 +169,20 @@
 							<span>Cadastro</span> <i class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="${createLink(uri: '/cliente')}"><i
-									class="fa fa-circle-o"></i>Cliente</a></li>
-							<li><a href="${createLink(uri: '/produto')}"><i
-									class="fa fa-circle-o"></i>Produto</a></li>
+							<li><a href="${createLink(uri: '/atividade')}"><i
+									class="fa fa-circle-o"></i>Atividade</a></li>
+							<li><a href="${createLink(uri: '/projeto')}"><i
+									class="fa fa-circle-o"></i>Projeto</a></li>
+						</ul></li>
+
+					<li class="treeview"><a href="#"> <i class="fa fa-gears"></i>
+							<span>Configuração</span> <i class="fa fa-angle-left pull-right"></i>
+					</a>
+						<ul class="treeview-menu">
+							<li><a href="${createLink(uri: '/situacaoAtividade')}"><i
+									class="fa fa-circle-o"></i>Situação Atividade</a></li>
+							<li><a href="${createLink(uri: '/situacaoProjeto')}"><i
+									class="fa fa-circle-o"></i>Situação Projeto</a></li>
 						</ul></li>
 
 					<li class="treeview"><a href="#"> <i class="fa fa-users"></i>
@@ -180,18 +190,12 @@
 							class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="pages/forms/general.html"><i
+							<li><a href="${createLink(uri: '/usuario')}"><i
 									class="fa fa-circle-o"></i>Usuário</a></li>
-							<li><a href="pages/forms/general.html"><i
-									class="fa fa-circle-o"></i>Grupo de Usuário</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i>Permissão<i
-									class="fa fa-angle-left pull-right"></i></a>
-								<ul class="treeview-menu">
-									<li><a href="#"><i class="fa fa-circle-o"></i>Usuário</a></li>
-									<li><a href="#"><i class="fa fa-circle-o"></i>Grupo de
-											Usuário</a></li>
-								</ul></li>
-
+							<li><a href="${createLink(uri: '/usuarioGrupo')}"><i
+									class="fa fa-circle-o"></i>Grupo Usuário</a></li>
+							<li><a href="${createLink(uri: '/permissaoAcesso')}"><i
+									class="fa fa-circle-o"></i>Permissão Acesso</a></li>
 						</ul></li>
 				</ul>
 				<!-- /.sidebar-menu -->
