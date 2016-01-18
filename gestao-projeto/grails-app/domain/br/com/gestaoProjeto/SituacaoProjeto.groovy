@@ -1,9 +1,10 @@
 package br.com.gestaoProjeto
 
 class SituacaoProjeto {
-	
+
 	String nome
 
-    static constraints = {
-    }
+	static constraints = {
+		nome blank: false, unique: true
+	}
 }
