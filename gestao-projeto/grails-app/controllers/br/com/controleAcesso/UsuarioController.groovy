@@ -1,120 +1,89 @@
 package br.com.controleAcesso
 
-
-
-import static org.springframework.http.HttpStatus.*
+import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
-import grails.transaction.Transactional
+import br.com.teste.enums.NotifyType
+import br.com.teste.utils.UtilsMensagem
 
 @Secured("IS_AUTHENTICATED_ANONYMOUSLY")
-@Transactional(readOnly = true)
 class UsuarioController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+	def index() {
+	}
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond Usuario.list(params), model:[usuarioInstanceCount: Usuario.count()]
-    }
+	def listar() {
 
-    def show(Usuario usuarioInstance) {
-        respond usuarioInstance
-    }
+		def lista = Usuario.createCriteria().list{ order("username") }
 
-    def create() {
-        respond new Usuario(params)
-    }
+		render(template: "lista", model:[lista: lista])
+	}
 
-    @Transactional
-    def save(Usuario usuarioInstance) {
-        if (usuarioInstance == null) {
-            notFound()
-            return
-        }
+	def incluir() {
 
-        if (usuarioInstance.hasErrors()) {
-            respond usuarioInstance.errors, view:'create'
-            return
-        }
+		render(template: "form", model:[title: "Novo", editable: true])
+	}
 
-        usuarioInstance.save flush:true
+	def alterar() {
+
+		Usuario usuario = Usuario.get(params.id)
+
+		render(template: "form", model:[title: "Alterar", editable: true, usuario: usuario])
+	}
+
+	def visualizar() {
+
+		Usuario usuario = Usuario.get(params.id)
+
+		render(template: "form", model:[title: "Visualizar", editable: false, usuario: usuario])
+	}
+
+	def salvar(Usuario usuario) {
 		
-		// ************************************************
-		// Incluir as permissoes do grupo no usuario
-		// ************************************************
-		List<UsuarioGrupoPermissao> listUsuarioGrupoPermissao = UsuarioGrupoPermissao.findAllByUsuarioGrupo(usuarioInstance.grupo)
-		
-		for (usuarioGrupoPermissao in listUsuarioGrupoPermissao) {
-			
-			UsuarioPermissao.create(usuarioInstance, usuarioGrupoPermissao.permissao, true)
-			
+		def retorno
+
+		if (params.usuario.id) {
+
+			Usuario old = Usuario.get(params.usuario.id);
+
+			if (old.version.toLong() > params.usuario.version.toLong()) {
+
+				retorno = UtilsMensagem.getMensagem("A situação projeto já foi alterado por outro usuário!\nFavor canecelar esta operação e tentar novamente!", NotifyType.ERROR)
+
+				render retorno as JSON
+
+				return
+			}
 		}
-		// ************************************************
-		// FIM - Incluir as permissoes do grupo no usuario
-		// ************************************************
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'usuario.label', default: 'Usuario'), usuarioInstance.id])
-                redirect usuarioInstance
-            }
-            '*' { respond usuarioInstance, [status: CREATED] }
-        }
-    }
+		if (usuario.hasErrors()) {
 
-    def edit(Usuario usuarioInstance) {
-        respond usuarioInstance
-    }
+			retorno = UtilsMensagem.getMensagem("Não foi possível salvar!", NotifyType.ERROR, usuario.errors)
+		} else {
 
-    @Transactional
-    def update(Usuario usuarioInstance) {
-        if (usuarioInstance == null) {
-            notFound()
-            return
-        }
+			usuario.save(flush:true)
 
-        if (usuarioInstance.hasErrors()) {
-            respond usuarioInstance.errors, view:'edit'
-            return
-        }
+			retorno = UtilsMensagem.getMensagem("Salvo com sucesso!", NotifyType.SUCCESS)
+		}
 
-        usuarioInstance.save flush:true
+		render retorno as JSON
+	}
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Usuario.label', default: 'Usuario'), usuarioInstance.id])
-                redirect usuarioInstance
-            }
-            '*'{ respond usuarioInstance, [status: OK] }
-        }
-    }
+	def excluir() {
 
-    @Transactional
-    def delete(Usuario usuarioInstance) {
+		def retorno
 
-        if (usuarioInstance == null) {
-            notFound()
-            return
-        }
+		Usuario usuario = Usuario.get(params.id)
 
-        usuarioInstance.delete flush:true
+		try {
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Usuario.label', default: 'Usuario'), usuarioInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
-    }
+			usuario.delete(flush:true)
 
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'usuario.label', default: 'Usuario'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
-    }
+			retorno = UtilsMensagem.getMensagem("Excluido com sucesso!", NotifyType.SUCCESS)
+		} catch(Exception e) {
+
+			retorno = UtilsMensagem.getMensagem("Não foi possível excluir!", NotifyType.ERROR)
+		}
+
+		render retorno as JSON
+	}
 }
