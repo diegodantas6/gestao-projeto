@@ -7,8 +7,7 @@
 	<g:formRemote name="form" url="[action: 'salvar']"
 		onSuccess="retornoSalvar(data)">
 
-		<input type="hidden" name="usuario.id"
-			value="${usuario?.id}">
+		<input type="hidden" name="usuario.id" value="${usuario?.id}">
 
 		<input type="hidden" name="usuario.version"
 			value="${usuario?.version}">
@@ -56,7 +55,9 @@
 				<g:if test="${editable}">
 					<select class="form-control select2" name="usuario.usuarioGrupo">
 						<option value="">Selecione o Grupo Usuário</option>
-						<g:each in="${br.com.controleAcesso.UsuarioGrupo.createCriteria().list{ order('nome') }}" var="usuarioGrupo">
+						<g:each
+							in="${br.com.controleAcesso.UsuarioGrupo.createCriteria().list{ order('nome') }}"
+							var="usuarioGrupo">
 							<g:if test="${usuario?.usuarioGrupo?.id == usuarioGrupo.id}">
 								<option value="${usuarioGrupo.id}" selected="selected">
 									${usuarioGrupo.nome}
@@ -71,21 +72,15 @@
 					</select>
 				</g:if>
 				<g:else>
-					<input type="text" class="form-control" value="${usuario?.usuarioGrupo?.nome}"
-						disabled>
+					<input type="text" class="form-control"
+						value="${usuario?.usuarioGrupo?.nome}" disabled>
 				</g:else>
 			</div>
 
-			<div class="col-sm-6 form-group" id="div_email">
+			<div class="col-sm-2 form-group" id="div_enabled">
 				<label>* Enable</label>
-				<div class="input-group">
-					<div class="input-group-addon">
-						<i class="fa fa-laptop"></i>
-					</div>
-
-					<g:checkBox class="form-control" name="usuario.enabled" value="${usuario?.enabled}"></g:checkBox>
-
-				</div>
+				<g:checkBox class="form-control teste" name="usuario.enabled"
+					id="enabled" value="${usuario?.enabled}" disabled="${!editable}"></g:checkBox>
 			</div>
 
 		</div>
@@ -109,6 +104,14 @@
 </div>
 <!-- /.box -->
 
+<style>
+.teste {
+	width: 40px !important;
+	height: 35px;
+	margin: 0px !important;
+}
+</style>
+
 <!-- Page script -->
 <script>
 	$(document).ready(function() {
@@ -116,6 +119,8 @@
 		$(".select2").select2();
 
 		$("#username").focus();
-
+<%--		$("#enabled").iCheck({--%>
+<%--			checkboxClass : 'icheckbox_minimal-blue'--%>
+<%--		});--%>
 	});
 </script>

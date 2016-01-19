@@ -19,8 +19,10 @@ class UsuarioController {
 	}
 
 	def incluir() {
-
-		render(template: "form", model:[title: "Novo", editable: true])
+		
+		Usuario usuario = new Usuario()
+		
+		render(template: "form", model:[title: "Novo", editable: true, usuario: usuario])
 	}
 
 	def alterar() {
