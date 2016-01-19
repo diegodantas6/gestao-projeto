@@ -17,7 +17,7 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			Cadastro<small>Situação Atividade</small>
+			Configuração<small>Situação Atividade</small>
 		</h1>
 	</section>
 

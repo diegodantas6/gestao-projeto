@@ -1,17 +1,15 @@
 package br.com.controleAcesso
 
+import br.com.teste.enums.SimNao;
+
 class UsuarioGrupo {
 
 	String nome
-	Boolean realizaAtividade
+	SimNao realizaAtividade
 	
     static constraints = {
 		nome blank: false, unique: true
+		realizaAtividade nullable: false
     }
 	
-	@Override
-	String toString() {
-		nome
-	}
-
 }

@@ -11,7 +11,7 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			Configuração<small>Situação Projeto</small>
+			Controle de Acesso<small>Grupo Usuário</small>
 		</h1>
 	</section>
 

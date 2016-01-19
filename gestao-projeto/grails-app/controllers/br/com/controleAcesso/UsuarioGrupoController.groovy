@@ -1,106 +1,89 @@
 package br.com.controleAcesso
 
-
-
-import static org.springframework.http.HttpStatus.*
+import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
-import grails.transaction.Transactional
+import br.com.teste.enums.NotifyType
+import br.com.teste.utils.UtilsMensagem
 
 @Secured("IS_AUTHENTICATED_ANONYMOUSLY")
-@Transactional(readOnly = true)
 class UsuarioGrupoController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+	def index() {
+	}
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond UsuarioGrupo.list(params), model:[usuarioGrupoInstanceCount: UsuarioGrupo.count()]
-    }
+	def listar() {
 
-    def show(UsuarioGrupo usuarioGrupoInstance) {
-        respond usuarioGrupoInstance
-    }
+		def lista = UsuarioGrupo.createCriteria().list{ order("nome") }
 
-    def create() {
-        respond new UsuarioGrupo(params)
-    }
+		render(template: "lista", model:[lista: lista])
+	}
 
-    @Transactional
-    def save(UsuarioGrupo usuarioGrupoInstance) {
-        if (usuarioGrupoInstance == null) {
-            notFound()
-            return
-        }
+	def incluir() {
 
-        if (usuarioGrupoInstance.hasErrors()) {
-            respond usuarioGrupoInstance.errors, view:'create'
-            return
-        }
+		render(template: "form", model:[title: "Novo", editable: true])
+	}
 
-        usuarioGrupoInstance.save flush:true
+	def alterar() {
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'usuarioGrupo.label', default: 'UsuarioGrupo'), usuarioGrupoInstance.id])
-                redirect usuarioGrupoInstance
-            }
-            '*' { respond usuarioGrupoInstance, [status: CREATED] }
-        }
-    }
+		UsuarioGrupo usuarioGrupo = UsuarioGrupo.get(params.id)
 
-    def edit(UsuarioGrupo usuarioGrupoInstance) {
-        respond usuarioGrupoInstance
-    }
+		render(template: "form", model:[title: "Alterar", editable: true, usuarioGrupo: usuarioGrupo])
+	}
 
-    @Transactional
-    def update(UsuarioGrupo usuarioGrupoInstance) {
-        if (usuarioGrupoInstance == null) {
-            notFound()
-            return
-        }
+	def visualizar() {
 
-        if (usuarioGrupoInstance.hasErrors()) {
-            respond usuarioGrupoInstance.errors, view:'edit'
-            return
-        }
+		UsuarioGrupo usuarioGrupo = UsuarioGrupo.get(params.id)
 
-        usuarioGrupoInstance.save flush:true
+		render(template: "form", model:[title: "Visualizar", editable: false, usuarioGrupo: usuarioGrupo])
+	}
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'UsuarioGrupo.label', default: 'UsuarioGrupo'), usuarioGrupoInstance.id])
-                redirect usuarioGrupoInstance
-            }
-            '*'{ respond usuarioGrupoInstance, [status: OK] }
-        }
-    }
+	def salvar(UsuarioGrupo usuarioGrupo) {
+		
+		def retorno
 
-    @Transactional
-    def delete(UsuarioGrupo usuarioGrupoInstance) {
+		if (params.usuarioGrupo.id) {
 
-        if (usuarioGrupoInstance == null) {
-            notFound()
-            return
-        }
+			UsuarioGrupo old = UsuarioGrupo.get(params.usuarioGrupo.id);
 
-        usuarioGrupoInstance.delete flush:true
+			if (old.version.toLong() > params.usuarioGrupo.version.toLong()) {
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'UsuarioGrupo.label', default: 'UsuarioGrupo'), usuarioGrupoInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
-    }
+				retorno = UtilsMensagem.getMensagem("A situação projeto já foi alterado por outro usuário!\nFavor canecelar esta operação e tentar novamente!", NotifyType.ERROR)
 
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'usuarioGrupo.label', default: 'UsuarioGrupo'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
-    }
+				render retorno as JSON
+
+				return
+			}
+		}
+
+		if (usuarioGrupo.hasErrors()) {
+
+			retorno = UtilsMensagem.getMensagem("Não foi possível salvar!", NotifyType.ERROR, usuarioGrupo.errors)
+		} else {
+
+			usuarioGrupo.save(flush:true)
+
+			retorno = UtilsMensagem.getMensagem("Salvo com sucesso!", NotifyType.SUCCESS)
+		}
+
+		render retorno as JSON
+	}
+
+	def excluir() {
+
+		def retorno
+
+		UsuarioGrupo usuarioGrupo = UsuarioGrupo.get(params.id)
+
+		try {
+
+			usuarioGrupo.delete(flush:true)
+
+			retorno = UtilsMensagem.getMensagem("Excluido com sucesso!", NotifyType.SUCCESS)
+		} catch(Exception e) {
+
+			retorno = UtilsMensagem.getMensagem("Não foi possível excluir!", NotifyType.ERROR)
+		}
+
+		render retorno as JSON
+	}
 }
