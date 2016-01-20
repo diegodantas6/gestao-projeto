@@ -6,5 +6,7 @@ class Projeto {
 	SituacaoProjeto situacaoProjeto
 
     static constraints = {
+		nome blank: false, unique: true
+		situacaoProjeto nullable: false
     }
 }
