@@ -1,5 +1,7 @@
 package br.com.gestaoProjeto
 
+import java.text.SimpleDateFormat;
+
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 import br.com.teste.enums.NotifyType
@@ -21,7 +23,7 @@ class AtividadeController {
 	def incluir() {
 
 		Atividade atividade = new Atividade()
-		
+
 		render(template: "form", model:[title: "Novo", editable: true, atividade: atividade])
 	}
 
@@ -42,6 +44,32 @@ class AtividadeController {
 	def salvar(Atividade atividade) {
 
 		def retorno
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy")
+
+		Date dataInicio = null
+		if (params.atividade.dataInicio)
+			dataInicio = dateFormat.parse(params.atividade.dataInicio)
+
+		Date dataFim = null
+		if (params.atividade.dataFim)
+			dataFim = dateFormat.parse(params.atividade.dataFim)
+
+		if (dataFim < dataInicio) {
+			retorno = UtilsMensagem.getMensagem("A data de Fim não pode ser menor do que a data de Inicio!", NotifyType.WARN)
+
+			render retorno as JSON
+
+			return
+		}
+
+		atividade.clearErrors()
+
+		atividade.dataInicio = dataInicio
+
+		atividade.dataFim = dataFim
+
+		atividade.validate()
 
 		if (params.atividade.id) {
 

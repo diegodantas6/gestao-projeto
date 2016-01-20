@@ -16,11 +16,11 @@
 		<tr>
 			<td>${atividade.nome}</td>
 			<td>${atividade.situacaoAtividade.nome}</td>
-			<td>${atividade.dataInicio}</td>
-			<td>${atividade.dataFim}</td>
+			<td>${new SimpleDateFormat('dd/MM/yyyy').format( atividade.dataInicio )}</td>
+			<td>${new SimpleDateFormat('dd/MM/yyyy').format( atividade.dataFim )}</td>
 			<td>${atividade.percentualConcluido}</td>
 			<td>${atividade.projeto.nome}</td>
-			<td>${atividade.usuario.nome}</td>
+			<td>${atividade.usuario.username}</td>
 			<td>
 				<div class="btn-group btn-group-justified" role="group">
 					<div class="btn-group" role="group">

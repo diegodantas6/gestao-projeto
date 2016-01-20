@@ -6,7 +6,7 @@ class Atividade {
 	
 	String nome
 	Date dataInicio = new Date()
-	Date dataFim = new Date()
+	Date dataFim = new Date().plus(1)
 	Integer percentualConcluido = 0
 	Projeto projeto
 	Usuario usuario

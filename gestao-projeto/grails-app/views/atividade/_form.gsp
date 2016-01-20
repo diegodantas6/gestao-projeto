@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <div class="box box-primary">
 	<div class="box-header with-border">
 		<h3 class="box-title">
@@ -34,7 +35,7 @@
 					</div>
 					<input type="text" class="form-control" name="atividade.dataInicio"
 						<g:if test="${!editable}">disabled</g:if> id="dataInicio"
-						value="${atividade?.dataInicio}">
+						value="${new SimpleDateFormat('dd/MM/yyyy').format( atividade?.dataInicio )}">
 				</div>
 			</div>
 
@@ -44,9 +45,9 @@
 					<div class="input-group-addon">
 						<i class="fa fa-laptop"></i>
 					</div>
-					<input type="text" class="form-control" name="atividade.dataFim"
+					<input type="date" class="form-control" name="atividade.dataFim"
 						<g:if test="${!editable}">disabled</g:if> id="dataFim"
-						value="${atividade?.dataFim}">
+						value="${new SimpleDateFormat('dd/MM/yyyy').format( atividade?.dataFim )}">
 				</div>
 			</div>
 
@@ -56,7 +57,8 @@
 					<div class="input-group-addon">
 						<i class="fa fa-laptop"></i>
 					</div>
-					<input type="text" class="form-control" name="atividade.percentualConcluido"
+					<input type="text" class="form-control"
+						name="atividade.percentualConcluido"
 						<g:if test="${!editable}">disabled</g:if> id="percentualConcluido"
 						value="${atividade?.percentualConcluido}">
 				</div>
@@ -65,12 +67,14 @@
 			<div class="col-sm-6 form-group" id="div_situacaoAtividade">
 				<label>* Situação</label>
 				<g:if test="${editable}">
-					<select class="form-control select2" name="atividade.situacaoAtividade">
+					<select class="form-control select2"
+						name="atividade.situacaoAtividade">
 						<option value="">Selecione a Situação</option>
 						<g:each
 							in="${br.com.gestaoProjeto.SituacaoAtividade.createCriteria().list{ order('nome') }}"
 							var="situacaoAtividade">
-							<g:if test="${atividade?.situacaoAtividade?.id == situacaoAtividade.id}">
+							<g:if
+								test="${atividade?.situacaoAtividade?.id == situacaoAtividade.id}">
 								<option value="${situacaoAtividade.id}" selected="selected">
 									${situacaoAtividade.nome}
 								</option>
@@ -151,8 +155,6 @@
 				</g:else>
 			</div>
 
-
-
 		</div>
 		<!-- /.box-body -->
 
@@ -181,6 +183,22 @@
 		$(".select2").select2();
 
 		$("#nome").focus();
+
+		$("#dataInicio").inputmask({
+			alias : "dd/mm/yyyy",
+			clearIncomplete : true
+		});
+
+		$("#dataFim").inputmask({
+			alias : "dd/mm/yyyy",
+			clearIncomplete : true
+		});
+
+		$("#percentualConcluido").inputmask({
+			alias : 'integer',
+			min : 0,
+			max : 100
+		});
 
 	});
 </script>
