@@ -31,11 +31,6 @@ class Usuario implements Serializable {
 		is(other) || (other instanceof Usuario && other.username == username)
 	}
 
-	@Override
-	String toString() {
-		username
-	}
-
 	Set<Permissao> getAuthorities() {
 		UsuarioPermissao.findAllByUsuario(this)*.permissao
 	}

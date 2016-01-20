@@ -23,11 +23,6 @@ class Permissao implements Serializable {
 		is(other) || (other instanceof Permissao && other.authority == authority)
 	}
 
-	@Override
-	String toString() {
-		authority
-	}
-
 	static constraints = {
 		authority blank: false, unique: true
 	}

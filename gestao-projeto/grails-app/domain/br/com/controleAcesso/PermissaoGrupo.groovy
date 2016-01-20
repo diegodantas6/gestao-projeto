@@ -8,9 +8,4 @@ class PermissaoGrupo {
 		nome blank: false, unique: true
 	}
 
-	@Override
-	String toString() {
-		nome
-	}
-	
 }
