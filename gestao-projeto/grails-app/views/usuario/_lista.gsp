@@ -3,7 +3,7 @@
 	<thead>
 		<tr>
 			<th>Nome</th>
-			<th>Enable</th>
+			<th>Ativo</th>
 			<th>Email</th>
 			<th>Grupo Usuário</th>
 			<th style="width: 75px;">Ações</th>
@@ -12,7 +12,7 @@
 	<g:each in="${lista}" var="usuario">
 		<tr>
 			<td>${usuario.username}</td>
-			<td>${usuario.enabled}</td>
+			<td>${usuario.ativo}</td>
 			<td>${usuario.email}</td>
 			<td>${usuario.usuarioGrupo.nome}</td>
 			<td>

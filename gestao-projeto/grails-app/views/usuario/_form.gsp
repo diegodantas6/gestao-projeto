@@ -78,11 +78,11 @@
 			</div>
 
 			<div class="col-sm-2 form-group" id="div_enabled">
-				<label>* Enable</label>
-				<g:checkBox class="form-control teste" name="usuario.enabled"
+				<label>Ativo</label>
+				<g:checkBox class="form-control check" name="usuario.enabled"
 					id="enabled" value="${usuario?.enabled}" disabled="${!editable}"></g:checkBox>
 			</div>
-
+			
 		</div>
 		<!-- /.box-body -->
 
@@ -104,14 +104,6 @@
 </div>
 <!-- /.box -->
 
-<style>
-.teste {
-	width: 40px !important;
-	height: 35px;
-	margin: 0px !important;
-}
-</style>
-
 <!-- Page script -->
 <script>
 	$(document).ready(function() {
@@ -119,8 +111,6 @@
 		$(".select2").select2();
 
 		$("#username").focus();
-<%--		$("#enabled").iCheck({--%>
-<%--			checkboxClass : 'icheckbox_minimal-blue'--%>
-<%--		});--%>
+
 	});
 </script>

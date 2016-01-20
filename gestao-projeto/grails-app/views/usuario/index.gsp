@@ -6,11 +6,8 @@
 <!-- CRUD -->
 <asset:javascript src="crud.js"/>
 
-<!-- iCheck 
-<link rel="stylesheet"
-	href="${createLink(uri: '/adminlte/plugins/iCheck/all.css')}">
-<script
-	src="${createLink(uri: '/adminlte/plugins/iCheck/icheck.min.js')}"></script>-->
+<!-- Custom CSS -->
+<asset:stylesheet src="custom.css"/>
 
 </head>
 <body>

@@ -66,4 +66,11 @@ class Usuario implements Serializable {
 	static mapping = {
 		password column: '`password`'
 	}
+	
+	public String getAtivo() {
+		if (enabled)
+			return "Sim"
+		else
+			return "Não"
+	}
 }
