@@ -1,6 +1,10 @@
 package br.com.gestaoProjeto
 
+import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
+
+import org.codehaus.groovy.grails.web.json.JSONArray
+import org.codehaus.groovy.grails.web.json.JSONObject;
 
 @Secured("IS_AUTHENTICATED_ANONYMOUSLY")
 class MenuController {
@@ -8,6 +12,8 @@ class MenuController {
 	def index() {
 
 		List projetos = Projeto.list(sort: "nome")
+		
+		JSONArray retorno = new JSONArray()
 		
 		for (projeto in projetos) {
 			
@@ -17,7 +23,7 @@ class MenuController {
 			
 			int totalConcluido = 0
 			
-			int totalFaltando = 0
+			int totalFaltando = 100
 			
 			for (atividade in atividades) {
 				
@@ -32,12 +38,19 @@ class MenuController {
 				totalConcluido = ( totalConcluido / quantidade )
 	
 				// calcula total faltando
-				totalFaltando = 100 - totalConcluido
+				totalFaltando -=  totalConcluido
 			}
 
-			println projeto.nome
-			println totalConcluido
-			println totalFaltando
+			JSONObject obj = new JSONObject()
+			
+			obj.put("nome", projeto.nome)
+			obj.put("concluido", totalConcluido)
+			obj.put("faltando", totalFaltando)
+
+			retorno.add(obj)
+			
 		}
+		
+		println retorno as JSON
 	}
 }
