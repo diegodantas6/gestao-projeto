@@ -10,11 +10,14 @@ import org.codehaus.groovy.grails.cli.support.UaaEnabler;
 import org.codehaus.groovy.grails.web.json.JSONArray
 import org.codehaus.groovy.grails.web.json.JSONObject
 
-@Secured("IS_AUTHENTICATED_ANONYMOUSLY")
+
+@Secured("ROLE_USUARIO_GRUPO_PERMISSAO")
 @Transactional(readOnly = true)
-class UsuarioGrupoPermissaoController {
+class PermissaoAcessoController {
 
 	def index() {
+		
+		render view: 'index', model: [retorno: '{}']
 		
 	}
 		
@@ -69,7 +72,7 @@ class UsuarioGrupoPermissaoController {
 		jPermissao.putAt("id", "'" + permissao.id + "'")
 		jPermissao.putAt("text", "'" + permissao.descricao + "'")
 		
-		if ( UsuarioGrupoPermissao.findByUsuarioGrupoAndPermissao(usuarioGrupo, permissao) == null ) {
+		if ( PermissaoAcesso.findByUsuarioGrupoAndPermissao(usuarioGrupo, permissao) == null ) {
 			
 			jPermissao.putAt("checked", false)
 			
@@ -90,24 +93,26 @@ class UsuarioGrupoPermissaoController {
 		jPermissaoGrupo.putAt("id", "'" + permissaoGrupo.id + "r'")
 		jPermissaoGrupo.putAt("text", "'" + permissaoGrupo.nome + "'")
 		jPermissaoGrupo.putAt("spriteCssClass", "'folder'")
-		jPermissaoGrupo.putAt("expanded", true)
+//		jPermissaoGrupo.putAt("expanded", true)
+		jPermissaoGrupo.putAt("expanded", false)
 
 		return jPermissaoGrupo
 		
 	}
 
-//	private JSONObject getJsonItemByPermissaoGrupoMenu(PermissaoGrupoMenu permissaoGrupoMenu) {
-//		
-//		JSONObject jPermissaoGrupoMenu = new JSONObject()
-//
-//		jPermissaoGrupoMenu.putAt("id", "'" + permissaoGrupoMenu.id + "m'")
-//		jPermissaoGrupoMenu.putAt("text", "'" + permissaoGrupoMenu.nome + "'")
-//		jPermissaoGrupoMenu.putAt("spriteCssClass", "'rootfolder'")
-//		jPermissaoGrupoMenu.putAt("expanded", true)
-//
-//		return jPermissaoGrupoMenu
-//		
-//	}
+	private JSONObject getJsonItemByPermissaoGrupoMenu(PermissaoGrupoMenu permissaoGrupoMenu) {
+		
+		JSONObject jPermissaoGrupoMenu = new JSONObject()
+
+		jPermissaoGrupoMenu.putAt("id", "'" + permissaoGrupoMenu.id + "m'")
+		jPermissaoGrupoMenu.putAt("text", "'" + permissaoGrupoMenu.nome + "'")
+		jPermissaoGrupoMenu.putAt("spriteCssClass", "'rootfolder'")
+		jPermissaoGrupoMenu.putAt("expanded", true)
+//		jPermissaoGrupoMenu.putAt("expanded", false)
+
+		return jPermissaoGrupoMenu
+		
+	}
 	
 	def carregaTreeView() {
 		
@@ -123,7 +128,8 @@ class UsuarioGrupoPermissaoController {
 						
 		} else {
 		
-			render template: 'form', model: [retorno: null]
+			//render template: 'form', model: [retorno: null]
+			render template: 'form', model: [retorno: '{}']
 		
 		}
 		
@@ -131,16 +137,17 @@ class UsuarioGrupoPermissaoController {
 	
 	@Transactional
 	def save() {
-
-		UsuarioGrupo usuarioGrupo = UsuarioGrupo.get(params.grupo.id)
+		
+		UsuarioGrupo usuarioGrupo = UsuarioGrupo.get(params.grupoUsuario)
 		
 		if (usuarioGrupo == null) {
 			
-			render("Favor selecionar o Grupo Usuário!")
+			String mensagem = 'Favor serlecionar o Grupo de Usuário!'
+			render(status: 500, text: message(code: mensagem))
 			
 		} else {
 		
-			UsuarioGrupoPermissao.removeAll(usuarioGrupo, true)
+			PermissaoAcesso.removeAll(usuarioGrupo, true)
 			
 			String[] permissoes = params.result.toString().split(",")
 			
@@ -150,7 +157,7 @@ class UsuarioGrupoPermissaoController {
 					
 					Permissao permissao = Permissao.get(idPermissao)
 					
-					UsuarioGrupoPermissao.create(usuarioGrupo, permissao, true)
+					PermissaoAcesso.create(usuarioGrupo, permissao, true)
 					
 				}
 				
@@ -173,7 +180,8 @@ class UsuarioGrupoPermissaoController {
 				it.delete(flush:true)
 			}
 			
-			render("Salvo com sucesso!")
+			String mensagem = 'Salvo com sucesso!'
+			render(status: 200, text: message(code: mensagem))
 			
 		}
 		
