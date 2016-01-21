@@ -8,7 +8,7 @@
 <!--<asset:javascript src="kendo/jquery.min.js" />-->
 <asset:javascript src="kendo/kendo.all.min.js" />
 
-<meta name="layout" content="gentelella">
+<meta name="layout" content="menu">
 
 <script type="text/javascript">
 	function retornoSal(val, texto) {
@@ -20,7 +20,7 @@
 		jQuery.ajax({
 			type : 'POST',
 			data : 'id=' + $("#grupoUsuario").val(),
-			url : '/Copa/usuarioGrupoPermissao/carregaTreeView',
+			url : 'carregaTreeView',
 			success : function(data, textStatus) {
 				jQuery('#div_permissoes').html(data);
 			},
