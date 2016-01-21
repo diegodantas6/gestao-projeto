@@ -106,6 +106,13 @@ class PermissaoAcessoController {
 
 			UsuarioGrupoPermissao.removeAll(usuarioGrupo, true)
 
+			List usuarios = Usuario.findAllByUsuarioGrupo(usuarioGrupo)
+
+			for (usuario in usuarios) {
+
+				UsuarioPermissao.removeAll(usuario, true)
+			}
+
 			String[] permissoes = params.result.toString().split(",")
 
 			for (idPermissao in permissoes) {
@@ -115,24 +122,12 @@ class PermissaoAcessoController {
 					Permissao permissao = Permissao.get(idPermissao)
 
 					UsuarioGrupoPermissao.create(usuarioGrupo, permissao, true)
+
+					for (usuario in usuarios) {
+
+						UsuarioPermissao.create(usuario, permissao, true)
+					}
 				}
-			}
-
-			StringBuilder sql = new StringBuilder()
-
-			sql.append(" select up                                             		 ")
-			sql.append(" from UsuarioPermissao up, Usuario u                   		 ")
-			sql.append(" where up.usuario = u                                 		 ")
-			sql.append(" and   u.usuarioGrupo = :grupo                        		 ")
-			sql.append(" and   not exists (select 1                           		 ")
-			sql.append("                   from UsuarioGrupoPermissao ugp 		     ")
-			sql.append("                   where u.usuarioGrupo = ugp.usuarioGrupo   ")
-			sql.append("                   and   up.permissao = ugp.permissao) 		 ")
-
-			List listUsuarioPermissao = UsuarioPermissao.executeQuery(sql.toString(), [grupo: usuarioGrupo])
-
-			listUsuarioPermissao.each {
-				it.delete(flush:true)
 			}
 
 			retorno = UtilsMensagem.getMensagem("Salvo com sucesso!", NotifyType.SUCCESS)
