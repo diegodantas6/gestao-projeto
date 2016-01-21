@@ -12,6 +12,9 @@
 		<input type="hidden" name="usuario.version"
 			value="${usuario?.version}">
 
+		<input type="hidden" name="grupoOld"
+			value="${usuario?.usuarioGrupo?.id}">
+
 		<div class="box-body">
 
 			<div class="col-sm-6 form-group" id="div_username">

@@ -19,9 +19,9 @@ class UsuarioController {
 	}
 
 	def incluir() {
-		
+
 		Usuario usuario = new Usuario()
-		
+
 		render(template: "form", model:[title: "Novo", editable: true, usuario: usuario])
 	}
 
@@ -40,13 +40,19 @@ class UsuarioController {
 	}
 
 	def salvar(Usuario usuario) {
-		
+
 		def retorno
 
+		Long grupoOld
+		Long grupoNew
+		
 		if (params.usuario.id) {
 
 			Usuario old = Usuario.get(params.usuario.id);
 
+			grupoOld = params.grupoOld.toLong()
+			grupoNew = params.usuario.usuarioGrupo.toLong()
+						
 			if (old.version.toLong() > params.usuario.version.toLong()) {
 
 				retorno = UtilsMensagem.getMensagem("A situação projeto já foi alterado por outro usuário!\nFavor canecelar esta operação e tentar novamente!", NotifyType.ERROR)
@@ -61,8 +67,37 @@ class UsuarioController {
 
 			retorno = UtilsMensagem.getMensagem("Não foi possível salvar!", NotifyType.ERROR, usuario.errors)
 		} else {
-
+		
 			usuario.save(flush:true)
+
+			if (grupoOld) {
+				
+				if (!(grupoOld.equals(grupoNew))) {
+					// incluir permissoes quando o usuario muda de grupo
+
+					UsuarioPermissao.removeAll(usuario, true)
+
+					List permissoes = UsuarioGrupoPermissao.findAllByUsuarioGrupo(usuario.usuarioGrupo)
+
+					for (usuarioGrupoPermissao in permissoes) {
+
+						UsuarioPermissao.create(usuario, usuarioGrupoPermissao.permissao, true)
+
+					}
+
+				}
+			} else {
+				// incluir permissoes para novos usuarios
+
+				List permissoes = UsuarioGrupoPermissao.findAllByUsuarioGrupo(usuario.usuarioGrupo)
+
+				for (usuarioGrupoPermissao in permissoes) {
+
+					UsuarioPermissao.create(usuario, usuarioGrupoPermissao.permissao, true)
+
+				}
+
+			}
 
 			retorno = UtilsMensagem.getMensagem("Salvo com sucesso!", NotifyType.SUCCESS)
 		}
@@ -77,6 +112,8 @@ class UsuarioController {
 		Usuario usuario = Usuario.get(params.id)
 
 		try {
+
+			UsuarioPermissao.removeAll(usuario, true);
 
 			usuario.delete(flush:true)
 
