@@ -43,6 +43,7 @@ class MenuController {
 
 			JSONObject obj = new JSONObject()
 			
+			obj.put("id", projeto.id)
 			obj.put("nome", projeto.nome)
 			obj.put("concluido", totalConcluido)
 			obj.put("faltando", totalFaltando)
@@ -51,6 +52,6 @@ class MenuController {
 			
 		}
 		
-		println retorno as JSON
+		render(view: "index", model: [retorno: retorno])
 	}
 }
