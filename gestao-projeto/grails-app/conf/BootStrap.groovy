@@ -30,13 +30,31 @@ class BootStrap {
 		new Permissao(authority: "ROLE_DELETE_PERMISSAO_ACESSO", descricao: delete, permissaoGrupo: permissaoAcesso).save()
 
 		// Configuracao
-		new PermissaoGrupo(nome: "Situação Atividade").save()
-		new PermissaoGrupo(nome: "Situação Projeto").save()
-		
+		PermissaoGrupo situacaoAtividade = new PermissaoGrupo(nome: "Situação Atividade").save()
+		new Permissao(authority: "ROLE_CREATE_SITUACAO_ATIVIDADE", descricao: create, permissaoGrupo: situacaoAtividade).save()
+		new Permissao(authority: "ROLE_READ_SITUACAO_ATIVIDADE", descricao: read, permissaoGrupo: situacaoAtividade).save()
+		new Permissao(authority: "ROLE_UPDATE_SITUACAO_ATIVIDADE", descricao: update, permissaoGrupo: situacaoAtividade).save()
+		new Permissao(authority: "ROLE_DELETE_SITUACAO_ATIVIDADE", descricao: delete, permissaoGrupo: situacaoAtividade).save()
+
+		PermissaoGrupo situacaoProjeto = new PermissaoGrupo(nome: "Situação Projeto").save()
+		new Permissao(authority: "ROLE_CREATE_SITUACAO_PROJETO", descricao: create, permissaoGrupo: situacaoProjeto).save()
+		new Permissao(authority: "ROLE_READ_SITUACAO_PROJETO", descricao: read, permissaoGrupo: situacaoProjeto).save()
+		new Permissao(authority: "ROLE_UPDATE_SITUACAO_PROJETO", descricao: update, permissaoGrupo: situacaoProjeto).save()
+		new Permissao(authority: "ROLE_DELETE_SITUACAO_PROJETO", descricao: delete, permissaoGrupo: situacaoProjeto).save()
+
 		// Cadastro
-		new PermissaoGrupo(nome: "Atividade").save()
-		new PermissaoGrupo(nome: "Projeto").save()
-		
+		PermissaoGrupo atividade = new PermissaoGrupo(nome: "Atividade").save()
+		new Permissao(authority: "ROLE_CREATE_ATIVIDADE", descricao: create, permissaoGrupo: atividade).save()
+		new Permissao(authority: "ROLE_READ_ATIVIDADE", descricao: read, permissaoGrupo: atividade).save()
+		new Permissao(authority: "ROLE_UPDATE_ATIVIDADE", descricao: update, permissaoGrupo: atividade).save()
+		new Permissao(authority: "ROLE_DELETE_ATIVIDADE", descricao: delete, permissaoGrupo: atividade).save()
+
+		PermissaoGrupo projeto = new PermissaoGrupo(nome: "Projeto").save()
+		new Permissao(authority: "ROLE_CREATE_PROJETO", descricao: create, permissaoGrupo: projeto).save()
+		new Permissao(authority: "ROLE_READ_PROJETO", descricao: read, permissaoGrupo: projeto).save()
+		new Permissao(authority: "ROLE_UPDATE_PROJETO", descricao: update, permissaoGrupo: projeto).save()
+		new Permissao(authority: "ROLE_DELETE_PROJETO", descricao: delete, permissaoGrupo: projeto).save()
+
     }
     def destroy = {
     }
