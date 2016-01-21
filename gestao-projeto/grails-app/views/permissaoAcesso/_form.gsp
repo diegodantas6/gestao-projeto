@@ -62,7 +62,8 @@
 
 <style>
 #treeview .k-sprite {
-	background-image: url("assets/kendo/coloricons-sprite.png");
+	background-image:
+		url("${createLink(uri: '/assets/kendo/coloricons-sprite.png')}");
 }
 
 .rootfolder {

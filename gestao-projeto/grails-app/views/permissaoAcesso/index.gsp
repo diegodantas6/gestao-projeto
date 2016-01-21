@@ -10,6 +10,14 @@
 <meta name="layout" content="menu">
 
 <script type="text/javascript">
+	$(document).ready(function() {
+
+		$("#grupoUsuario").select2();
+
+		carregaTreeView();
+
+	});
+
 	function retornoSalvar(data) {
 		$.notify(data.mensagem, data.type);
 
@@ -19,8 +27,8 @@
 	function carregaTreeView() {
 		var id = $("#grupoUsuario").val()
 		$("#divForm").hide()
-		
-		if ( id > 0) {
+
+		if (id > 0) {
 			$.ajax({
 				type : 'POST',
 				data : 'id=' + id,
@@ -41,7 +49,7 @@
 		var grupoUsuario = $("#grupoUsuario").val()
 		var result = $("#result").val()
 
-		if ( grupoUsuario > 0) {
+		if (grupoUsuario > 0) {
 			$.ajax({
 				type : 'POST',
 				data : 'grupoUsuario=' + grupoUsuario + '&result=' + result,
@@ -94,14 +102,6 @@
 		</div>
 
 	</section>
-
-	<script>
-		$(document).ready(function() {
-
-			$("#grupoUsuario").select2();
-
-		});
-	</script>
 
 </body>
 </html>
