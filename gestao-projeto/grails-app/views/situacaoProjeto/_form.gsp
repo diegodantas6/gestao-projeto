@@ -7,7 +7,8 @@
 	<g:formRemote name="form" url="[action: 'salvar']"
 		onSuccess="retornoSalvar(data)">
 
-		<input type="hidden" name="situacaoProjeto.id" value="${situacaoProjeto?.id}">
+		<input type="hidden" name="situacaoProjeto.id"
+			value="${situacaoProjeto?.id}">
 
 		<input type="hidden" name="situacaoProjeto.version"
 			value="${situacaoProjeto?.version}">
@@ -35,8 +36,7 @@
 				<button type="reset" class="btn btn-danger"
 					onclick="javascript: cancelar()">Cancelar</button>
 
-				<button type="submit" class="btn btn-primary pull-right"
-					onclick="javascript: salvar()">Salvar</button>
+				<button type="submit" class="btn btn-primary pull-right">Salvar</button>
 			</g:if>
 			<g:else>
 				<button type="reset" class="btn btn-primary pull-right"

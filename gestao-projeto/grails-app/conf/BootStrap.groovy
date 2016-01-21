@@ -24,10 +24,7 @@ class BootStrap {
 		new Permissao(authority: "ROLE_DELETE_USUARIO_GRUPO", descricao: delete, permissaoGrupo: usuarioGrupo).save()
 		
 		PermissaoGrupo permissaoAcesso = new PermissaoGrupo(nome: "Permissão Acesso").save()
-		new Permissao(authority: "ROLE_CREATE_PERMISSAO_ACESSO", descricao: create, permissaoGrupo: permissaoAcesso).save()
-		new Permissao(authority: "ROLE_READ_PERMISSAO_ACESSO", descricao: read, permissaoGrupo: permissaoAcesso).save()
 		new Permissao(authority: "ROLE_UPDATE_PERMISSAO_ACESSO", descricao: update, permissaoGrupo: permissaoAcesso).save()
-		new Permissao(authority: "ROLE_DELETE_PERMISSAO_ACESSO", descricao: delete, permissaoGrupo: permissaoAcesso).save()
 
 		// Configuracao
 		PermissaoGrupo situacaoAtividade = new PermissaoGrupo(nome: "Situação Atividade").save()

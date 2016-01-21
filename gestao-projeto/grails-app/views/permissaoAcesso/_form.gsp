@@ -1,12 +1,23 @@
-<div id="div_permissoes">
-
-	<div class="demo-section k-header">
+<div class="box-body">
+	<div class="col-sm-6 form-group">
 		<label>Permissões</label>
-		<div id="treeview"></div>
-		<input id="result" name="result" type="hidden" />
+		<div class="input-group">
+			<div id="treeview"></div>
+			<input id="result" name="result" type="hidden" />
+		</div>
 	</div>
+</div>
+<!-- /.box-body -->
 
-	<script>
+<div class="box-footer">
+	<button type="reset" class="btn btn-danger"
+		onclick="javascript: cancelar()">Cancelar</button>
+
+	<button type="submit" class="btn btn-primary pull-right"
+		onclick="javascript: salvar()">Salvar</button>
+</div>
+
+<script>
 		$("#treeview").kendoTreeView({
 			checkboxes : {
 				checkChildren : true
@@ -49,29 +60,28 @@
 		onCheck();
 	</script>
 
-	<style>
-		#treeview .k-sprite {
-			background-image: url("assets/kendo/coloricons-sprite.png");
-		}
-		
-		.rootfolder {
-			background-position: 0 0;
-		}
-		
-		.folder {
-			background-position: 0 -16px;
-		}
-		
-		.pdf {
-			background-position: 0 -32px;
-		}
-		
-		.html {
-			background-position: 0 -48px;
-		}
-		
-		.image {
-			background-position: 0 -64px;
-		}
-	</style>
-</div>
+<style>
+#treeview .k-sprite {
+	background-image: url("assets/kendo/coloricons-sprite.png");
+}
+
+.rootfolder {
+	background-position: 0 0;
+}
+
+.folder {
+	background-position: 0 -16px;
+}
+
+.pdf {
+	background-position: 0 -32px;
+}
+
+.html {
+	background-position: 0 -48px;
+}
+
+.image {
+	background-position: 0 -64px;
+}
+</style>

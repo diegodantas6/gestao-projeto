@@ -50,8 +50,7 @@
 				<button type="reset" class="btn btn-danger"
 					onclick="javascript: cancelar()">Cancelar</button>
 
-				<button type="submit" class="btn btn-primary pull-right"
-					onclick="javascript: salvar()">Salvar</button>
+				<button type="submit" class="btn btn-primary pull-right">Salvar</button>
 			</g:if>
 			<g:else>
 				<button type="reset" class="btn btn-primary pull-right"
