@@ -30,4 +30,11 @@
 /web-app/plugins
 
 # "temporary" build files
-/target
+/target/classes
+/target/*.log
+/target/work/*.tmp
+/target/work/plugin-build-classes
+/target/work/plugin-classes
+/target/work/plugin-provided-classes
+/target/work/resources
+/target/work/tomcat
