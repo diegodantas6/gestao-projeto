@@ -169,9 +169,9 @@
 							<span>Cadastro</span> <i class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="${createLink(uri: '/atividade')}"><i
+							<li><a href="${createLink(uri: '/atividade/index')}"><i
 									class="fa fa-circle-o"></i>Atividade</a></li>
-							<li><a href="${createLink(uri: '/projeto')}"><i
+							<li><a href="${createLink(uri: '/projeto/index')}"><i
 									class="fa fa-circle-o"></i>Projeto</a></li>
 						</ul></li>
 
@@ -179,9 +179,9 @@
 							<span>Configuração</span> <i class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="${createLink(uri: '/situacaoAtividade')}"><i
+							<li><a href="${createLink(uri: '/situacaoAtividade/index')}"><i
 									class="fa fa-circle-o"></i>Situação Atividade</a></li>
-							<li><a href="${createLink(uri: '/situacaoProjeto')}"><i
+							<li><a href="${createLink(uri: '/situacaoProjeto/index')}"><i
 									class="fa fa-circle-o"></i>Situação Projeto</a></li>
 						</ul></li>
 
@@ -190,11 +190,11 @@
 							class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="${createLink(uri: '/usuario')}"><i
+							<li><a href="${createLink(uri: '/usuario/index')}"><i
 									class="fa fa-circle-o"></i>Usuário</a></li>
-							<li><a href="${createLink(uri: '/usuarioGrupo')}"><i
+							<li><a href="${createLink(uri: '/usuarioGrupo/index')}"><i
 									class="fa fa-circle-o"></i>Grupo Usuário</a></li>
-							<li><a href="${createLink(uri: '/permissaoAcesso')}"><i
+							<li><a href="${createLink(uri: '/permissaoAcesso/index')}"><i
 									class="fa fa-circle-o"></i>Permissão Acesso</a></li>
 						</ul></li>
 				</ul>

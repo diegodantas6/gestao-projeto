@@ -128,6 +128,7 @@ grails.plugin.springsecurity.password.algorithm = 'SHA-256'
 grails.plugin.springsecurity.logout.afterLogoutUrl = '/'
 grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/menu'
 grails.plugin.springsecurity.successHandler.alwaysUseDefault = true
+grails.plugin.springsecurity.successHandler.ajaxSuccessUrl = '/menu'
 
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/':                ['permitAll'],
