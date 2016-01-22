@@ -159,7 +159,7 @@
 				<ul class="sidebar-menu">
 					<li class="header">MENU</li>
 
-					<li><a href="${createLink(uri: '/menu')}"><i
+					<li><a href="${createLink(uri: '/dashboard')}"><i
 							class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 
 					<li><a href="${createLink(uri: '/agenda')}"><i
