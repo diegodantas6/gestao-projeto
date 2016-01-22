@@ -1,7 +1,10 @@
 <html>
 <head>
 	<meta name='layout' content='main'/>
-	<title><g:message code="springSecurity.login.title"/></title>
+<%--	<title><g:message code="springSecurity.login.title"/></title>--%>
+
+	<title>DIEGO</title>
+
 	<style type='text/css' media='screen'>
 	#login {
 		margin: 15px 0px;
