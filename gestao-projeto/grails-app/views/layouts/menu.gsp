@@ -149,7 +149,7 @@
 						<asset:image src="user.jpg" class="img-circle" alt="User Image" />
 					</div>
 					<div class="pull-left info">
-						<p>Alexander Pierce</p>
+						<p><sec:loggedInUserInfo field="username"/></p>
 						<!-- Status -->
 						<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 					</div>
@@ -236,7 +236,8 @@
 				keyboardEnabled : true,
 				//theme : 'supervan',
 				title : 'Gestão de Projeto',
-				icon : 'glyphicon glyphicon-ok',
+				//icon : 'glyphicon glyphicon-ok',
+				//columnClass: 'auto',
 				content : message,
 
 				confirm : function() {
