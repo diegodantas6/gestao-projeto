@@ -67,6 +67,8 @@ class DashboardController {
 			
 			eq("projeto", projeto)
 			
+			order("usuario", "nome")
+			
 		}
 		
 		render(template: "atividade", model: [retorno: atividades])

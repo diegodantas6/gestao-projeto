@@ -1,8 +1,8 @@
 <g:each in="${retorno}" var="atividade">
 
 <ul>
-	<li>${atividade.nome}</li>
 	<li>${atividade.usuario.username}</li>
+	<li>${atividade.nome}</li>
 </ul>
 
 </g:each>
