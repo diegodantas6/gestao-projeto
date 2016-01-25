@@ -10,6 +10,10 @@ import org.codehaus.groovy.grails.web.json.JSONObject;
 class DashboardController {
 
 	def index() {
+		
+	}
+	
+	def getProjetos() {
 
 		List projetos = Projeto.list(sort: "nome")
 		
@@ -52,6 +56,19 @@ class DashboardController {
 			
 		}
 		
-		render(view: "index", model: [retorno: retorno])
+		render(template: "projeto", model: [retorno: retorno])
+	}
+	
+	def getAtividades() {
+		
+		Projeto projeto = Projeto.get(params.id)
+		
+		List atividades = Atividade.createCriteria().list {
+			
+			eq("projeto", projeto)
+			
+		}
+		
+		render(template: "atividade", model: [retorno: atividades])
 	}
 }
