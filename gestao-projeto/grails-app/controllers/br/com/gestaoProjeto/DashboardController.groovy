@@ -70,7 +70,7 @@ class DashboardController {
 			order("usuario", "nome")
 			
 		}
-		
-		render(template: "atividade", model: [retorno: atividades])
+
+		render(template: "atividade", model: [atividades: atividades, title: projeto.nome])
 	}
 }
