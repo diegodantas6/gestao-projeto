@@ -15,7 +15,19 @@ class DashboardController {
 	
 	def getProjetos() {
 
-		List projetos = Projeto.list(sort: "nome")
+		//List projetos = Projeto.list(sort: "nome")
+		
+		List projetos = Projeto.createCriteria().list {
+			
+			situacaoProjeto {
+				
+				eq("exibeDashboard", true)
+				
+			}
+			
+			order("nome")
+			
+		}
 		
 		JSONArray retorno = new JSONArray()
 		

@@ -20,7 +20,9 @@ class SituacaoProjetoController {
 
 	def incluir() {
 
-		render(template: "form", model:[title: "Novo", editable: true])
+		SituacaoProjeto situacaoProjeto = new SituacaoProjeto()
+		
+		render(template: "form", model:[title: "Novo", editable: true, situacaoProjeto: situacaoProjeto])
 	}
 
 	def alterar() {

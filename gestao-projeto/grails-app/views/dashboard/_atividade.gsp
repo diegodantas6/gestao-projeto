@@ -14,7 +14,7 @@
 			<g:if test="${ newUser == currentUser }">
 
 				<h4>
-					${atividade.nome}
+					${atividade.nome} - ${atividade.situacaoAtividade.nome}
 					<small class="pull-right"> ${atividade.percentualConcluido}%
 					</small>
 				</h4>
@@ -49,7 +49,7 @@
 				</h3>
 
 				<h4>
-					${atividade.nome}
+					${atividade.nome} - ${atividade.situacaoAtividade.nome}
 					<small class="pull-right"> ${atividade.percentualConcluido}%
 					</small>
 				</h4>

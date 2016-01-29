@@ -3,12 +3,14 @@
 	<thead>
 		<tr>
 			<th>Nome</th>
+			<th>Exibe DashBoard</th>
 			<th style="width: 75px;">Ações</th>
 		</tr>
 	</thead>
 	<g:each in="${lista}" var="situacaoProjeto">
 		<tr>
 			<td>${situacaoProjeto.nome}</td>
+			<td>${situacaoProjeto.exibe}</td>
 			<td>
 				<div class="btn-group btn-group-justified" role="group">
 					<div class="btn-group" role="group">

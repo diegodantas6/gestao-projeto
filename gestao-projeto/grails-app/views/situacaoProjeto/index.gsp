@@ -6,6 +6,9 @@
 <!-- CRUD -->
 <asset:javascript src="crud.js"/>
 
+<!-- Custom CSS -->
+<asset:stylesheet src="custom.css"/>
+
 </head>
 <body>
 	<!-- Content Header (Page header) -->

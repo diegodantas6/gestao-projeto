@@ -26,6 +26,12 @@
 						value="${situacaoProjeto?.nome}">
 				</div>
 			</div>
+			
+			<div class="col-sm-2 form-group" id="div_exibeDashboard">
+				<label>Exibe DashBoard</label>
+				<g:checkBox class="form-control check" name="situacaoProjeto.exibeDashboard"
+					id="enabled" value="${situacaoProjeto?.exibeDashboard}" disabled="${!editable}"></g:checkBox>
+			</div>
 
 		</div>
 		<!-- /.box-body -->
