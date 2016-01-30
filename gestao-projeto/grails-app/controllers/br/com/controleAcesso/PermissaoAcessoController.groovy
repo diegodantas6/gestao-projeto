@@ -13,7 +13,7 @@ import br.com.teste.enums.NotifyType
 import br.com.teste.utils.UtilsMensagem
 
 
-@Secured("IS_AUTHENTICATED_ANONYMOUSLY")
+@Secured("ROLE_UPDATE_PERMISSAO_ACESSO")
 class PermissaoAcessoController {
 
 	def index() {

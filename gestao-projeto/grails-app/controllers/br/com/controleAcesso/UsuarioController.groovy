@@ -5,9 +5,11 @@ import grails.plugin.springsecurity.annotation.Secured
 import br.com.teste.enums.NotifyType
 import br.com.teste.utils.UtilsMensagem
 
-@Secured("IS_AUTHENTICATED_ANONYMOUSLY")
+
+@Secured("IS_AUTHENTICATED_FULLY")
 class UsuarioController {
 
+	@Secured(["ROLE_CREATE_USUARIO", "ROLE_READ_USUARIO", "ROLE_UPDATE_USUARIO", "ROLE_DELETE_USUARIO"])
 	def index() {
 	}
 
@@ -18,6 +20,7 @@ class UsuarioController {
 		render(template: "lista", model:[lista: lista])
 	}
 
+	@Secured("ROLE_CREATE_USUARIO")
 	def incluir() {
 
 		Usuario usuario = new Usuario()
@@ -25,6 +28,7 @@ class UsuarioController {
 		render(template: "form", model:[title: "Novo", editable: true, usuario: usuario])
 	}
 
+	@Secured("ROLE_UPDATE_USUARIO")
 	def alterar() {
 
 		Usuario usuario = Usuario.get(params.id)
@@ -32,6 +36,7 @@ class UsuarioController {
 		render(template: "form", model:[title: "Alterar", editable: true, usuario: usuario])
 	}
 
+	@Secured("ROLE_READ_USUARIO")
 	def visualizar() {
 
 		Usuario usuario = Usuario.get(params.id)
@@ -105,6 +110,7 @@ class UsuarioController {
 		render retorno as JSON
 	}
 
+	@Secured("ROLE_DELETE_USUARIO")
 	def excluir() {
 
 		def retorno

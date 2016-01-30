@@ -5,9 +5,11 @@ import grails.plugin.springsecurity.annotation.Secured
 import br.com.teste.enums.NotifyType
 import br.com.teste.utils.UtilsMensagem
 
-@Secured("IS_AUTHENTICATED_ANONYMOUSLY")
+
+@Secured("IS_AUTHENTICATED_FULLY")
 class SituacaoProjetoController {
 
+	@Secured(["ROLE_CREATE_SITUACAO_PROJETO", "ROLE_READ_SITUACAO_PROJETO", "ROLE_UPDATE_SITUACAO_PROJETO", "ROLE_DELETE_SITUACAO_PROJETO"])
 	def index() {
 	}
 
@@ -18,6 +20,7 @@ class SituacaoProjetoController {
 		render(template: "lista", model:[lista: lista])
 	}
 
+	@Secured("ROLE_CREATE_SITUACAO_PROJETO")
 	def incluir() {
 
 		SituacaoProjeto situacaoProjeto = new SituacaoProjeto()
@@ -25,6 +28,7 @@ class SituacaoProjetoController {
 		render(template: "form", model:[title: "Novo", editable: true, situacaoProjeto: situacaoProjeto])
 	}
 
+	@Secured("ROLE_UPDATE_SITUACAO_PROJETO")
 	def alterar() {
 
 		SituacaoProjeto situacaoProjeto = SituacaoProjeto.get(params.id)
@@ -32,6 +36,7 @@ class SituacaoProjetoController {
 		render(template: "form", model:[title: "Alterar", editable: true, situacaoProjeto: situacaoProjeto])
 	}
 
+	@Secured("ROLE_READ_SITUACAO_PROJETO")
 	def visualizar() {
 
 		SituacaoProjeto situacaoProjeto = SituacaoProjeto.get(params.id)
@@ -70,6 +75,7 @@ class SituacaoProjetoController {
 		render retorno as JSON
 	}
 
+	@Secured("ROLE_DELETE_SITUACAO_PROJETO")
 	def excluir() {
 
 		def retorno
