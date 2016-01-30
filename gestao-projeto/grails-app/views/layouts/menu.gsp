@@ -128,7 +128,8 @@
 
 						<!-- LogOff -->
 						<li class="notifications-menu"><a
-							href="${createLink(uri: '/')}"> <i class="fa fa-power-off"></i>
+							href="${createLink(controller: 'logout')}"> <i
+								class="fa fa-power-off" data-toggle="tooltip" title="Logout"></i>
 						</a></li>
 
 					</ul>
@@ -149,7 +150,9 @@
 						<asset:image src="user.jpg" class="img-circle" alt="User Image" />
 					</div>
 					<div class="pull-left info">
-						<p><sec:loggedInUserInfo field="username"/></p>
+						<p>
+							<sec:loggedInUserInfo field="username" />
+						</p>
 						<!-- Status -->
 						<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 					</div>
