@@ -1,127 +1,118 @@
 <html>
 <head>
-	<meta name='layout' content='main'/>
-<%--	<title><g:message code="springSecurity.login.title"/></title>--%>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>AdminLTE 2 | Log in</title>
+<!-- Tell the browser to be responsive to screen width -->
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport">
 
-	<title>DIEGO</title>
+<!-- Reset -->
+<link rel="stylesheet"
+	href="${createLink(uri: '/adminlte/plugins/reset/html5-reset.css')}">
+<!-- Bootstrap 3.3.5 -->
+<link rel="stylesheet"
+	href="${createLink(uri: '/adminlte/bootstrap/css/bootstrap.min.css')}">
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet"
+	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- Theme style -->
+<link rel="stylesheet"
+	href="${createLink(uri: '/adminlte/dist/css/AdminLTE.min.css')}">
 
-	<style type='text/css' media='screen'>
-	#login {
-		margin: 15px 0px;
-		padding: 0px;
-		text-align: center;
-	}
+<!-- REQUIRED JS SCRIPTS -->
 
-	#login .inner {
-		width: 340px;
-		padding-bottom: 6px;
-		margin: 60px auto;
-		text-align: left;
-		border: 1px solid #aab;
-		background-color: #f0f0fa;
-		-moz-box-shadow: 2px 2px 2px #eee;
-		-webkit-box-shadow: 2px 2px 2px #eee;
-		-khtml-box-shadow: 2px 2px 2px #eee;
-		box-shadow: 2px 2px 2px #eee;
-	}
+<!-- jQuery 2.1.4 -->
+<script
+	src="${createLink(uri: '/adminlte/plugins/jQuery/jQuery-2.1.4.min.js')}"></script>
+<!-- Bootstrap 3.3.5 -->
+<script
+	src="${createLink(uri: '/adminlte/bootstrap/js/bootstrap.min.js')}"></script>
 
-	#login .inner .fheader {
-		padding: 18px 26px 14px 26px;
-		background-color: #f7f7ff;
-		margin: 0px 0 14px 0;
-		color: #2e3741;
-		font-size: 18px;
-		font-weight: bold;
-	}
-
-	#login .inner .cssform p {
-		clear: left;
-		margin: 0;
-		padding: 4px 0 3px 0;
-		padding-left: 105px;
-		margin-bottom: 20px;
-		height: 1%;
-	}
-
-	#login .inner .cssform input[type='text'] {
-		width: 120px;
-	}
-
-	#login .inner .cssform label {
-		font-weight: bold;
-		float: left;
-		text-align: right;
-		margin-left: -105px;
-		width: 110px;
-		padding-top: 3px;
+<style type="text/css">
+	.login_message {
+		padding-bottom: 0px;
+		padding-top: 10px;
+		padding-left: 10px;
 		padding-right: 10px;
-	}
-
-	#login #remember_me_holder {
-		padding-left: 120px;
-	}
-
-	#login #submit {
-		margin-left: 15px;
-	}
-
-	#login #remember_me_holder label {
-		float: none;
-		margin-left: 0;
-		text-align: left;
-		width: 200px
-	}
-
-	#login .inner .login_message {
-		padding: 6px 25px 20px 25px;
 		color: #c33;
 	}
+</style>
 
-	#login .inner .text_ {
-		width: 120px;
-	}
-
-	#login .inner .chk {
-		height: 12px;
-	}
-	</style>
 </head>
 
-<body>
-<div id='login'>
-	<div class='inner'>
-		<div class='fheader'><g:message code="springSecurity.login.header"/></div>
+<body class="hold-transition login-page">
 
-		<g:if test='${flash.message}'>
-			<div class='login_message'>${flash.message}</div>
-		</g:if>
+	<div class="login-box">
 
-		<form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>
-			<p>
-				<label for='username'><g:message code="springSecurity.login.username.label"/>:</label>
-				<input type='text' class='text_' name='j_username' id='username'/>
-			</p>
+		<div class="login-logo">
+			<b>Admin</b>LTE
+		</div>
 
-			<p>
-				<label for='password'><g:message code="springSecurity.login.password.label"/>:</label>
-				<input type='password' class='text_' name='j_password' id='password'/>
-			</p>
+		<div class="box box-primary">
+			<div class="box-header with-border">
+				<h3 class="box-title">Login</h3>
+			</div>
 
-			<p id="remember_me_holder">
-				<input type='checkbox' class='chk' name='${rememberMeParameter}' id='remember_me' <g:if test='${hasCookie}'>checked='checked'</g:if>/>
-				<label for='remember_me'><g:message code="springSecurity.login.remember.me.label"/></label>
-			</p>
+			<g:if test='${flash.message}'>
+				<div class='login_message'>
+					${flash.message}
+				</div>
+			</g:if>
 
-			<p>
-				<input type='submit' id="submit" value='${message(code: "springSecurity.login.button")}'/>
-			</p>
-		</form>
+			<form action='${postUrl}' method='POST' id='loginForm'
+				class='cssform' autocomplete='off'>
+
+				<div class="box-body">
+
+					<div class="col-sm-12 form-group">
+						<label>Nome</label>
+						<div class="input-group">
+							<div class="input-group-addon">
+								<i class="fa fa-laptop"></i>
+							</div>
+							<input type="text" class="form-control" name="j_username"
+								required="required" id="username">
+						</div>
+					</div>
+
+					<div class="col-sm-12 form-group">
+						<label>Senha</label>
+						<div class="input-group">
+							<div class="input-group-addon">
+								<i class="fa fa-lock"></i>
+							</div>
+							<input type="password" class="form-control" name="j_password"
+								required="required" id="password">
+						</div>
+					</div>
+				</div>
+
+				<div class="box-footer">
+
+					<button type="reset" class="btn btn-danger">Cancelar</button>
+
+					<button type="submit" class="btn btn-primary pull-right">Conectar</button>
+
+				</div>
+
+			</form>
+
+		</div>
+
 	</div>
-</div>
-<script type='text/javascript'>
-(function() {
-	document.forms['loginForm'].elements['j_username'].focus();
-})();
-</script>
+	<!-- /.login-box -->
+
+	<script type='text/javascript'>
+		(function() {
+			document.forms['loginForm'].elements['j_username'].focus();
+		})();
+	</script>
+
 </body>
+
 </html>
