@@ -101,8 +101,12 @@
 	}
 
 	function voltar() {
+
 		$("#divCalendario").show()
 		$("#divForm").hide()
+
+		$(".select2").select2()
+		
 	}
 
 </script>
