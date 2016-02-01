@@ -15,6 +15,9 @@ function carregarLista() {
 		data : {},
 		success : function(data) {
 			$("#divLista").html(data)
+		},
+		error : function(data) {
+			retornoErro(data)
 		}
 	})
 }
@@ -34,6 +37,9 @@ function excluir(id) {
 				if (data.type == "success") {
 					carregarLista()
 				}
+			},
+			error : function(data) {
+				retornoErro(data)
 			}
 		})
 	}, function() {
@@ -51,6 +57,9 @@ function visualizar(id) {
 			$("#divFormLista").hide()
 			$("#divForm").show()
 			$("#divForm").html(data)
+		},
+		error : function(data) {
+			retornoErro(data)
 		}
 	})
 }
@@ -66,6 +75,9 @@ function alterar(id) {
 			$("#divFormLista").hide()
 			$("#divForm").show()
 			$("#divForm").html(data)
+		},
+		error : function(data) {
+			retornoErro(data)
 		}
 	})
 }
@@ -106,6 +118,28 @@ function incluir() {
 			$("#divFormLista").hide()
 			$("#divForm").show()
 			$("#divForm").html(data)
+		},
+		error : function(data) {
+			retornoErro(data)
 		}
 	})
 }
+
+function retornoErro(data) {
+	
+	if (data.status == 403) {
+		
+		$.notify("Entre em contato com o administrador para obter permissão.", "info");
+		
+		$.notify("Desculpe, você não possui autorização para realizar esta operação.", "error");
+		
+	} else {
+
+		$.notify("Entre em contato com o administrador.", "info");
+		
+		$.notify("Desculpe, erro desconhecido.", "error");
+		
+	}
+	
+}
+
