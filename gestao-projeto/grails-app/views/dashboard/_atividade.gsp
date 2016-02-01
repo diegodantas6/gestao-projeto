@@ -14,30 +14,20 @@
 			<g:if test="${ newUser == currentUser }">
 
 				<h4>
-					${atividade.nome} - ${atividade.situacaoAtividade.nome}
+					${atividade.nome}
+					-
+					${atividade.situacaoAtividade.nome}
 					<small class="pull-right"> ${atividade.percentualConcluido}%
 					</small>
 				</h4>
 
-				<g:if test="${atividade.percentualConcluido > 50}">
-					<div class="progress xs">
-						<div class="progress-bar progress-bar-primary"
-							style="width: ${atividade.percentualConcluido}%"
-							role="progressbar"
-							aria-valuenow="${atividade.percentualConcluido}"
-							aria-valuemin="0" aria-valuemax="100"></div>
-					</div>
-				</g:if>
-				<g:else>
-					<div class="progress xs">
-						<div class="progress-bar progress-bar-danger"
-							style="width: ${atividade.percentualConcluido}%"
-							role="progressbar"
-							aria-valuenow="${atividade.percentualConcluido}"
-							aria-valuemin="0" aria-valuemax="100"></div>
-					</div>
-
-				</g:else>
+				<div class="progress xs">
+					<div class="progress-bar"
+						style="width: ${atividade.percentualConcluido}%; background-color: ${atividade.situacaoAtividade.cor}"
+						role="progressbar"
+						aria-valuenow="${atividade.percentualConcluido}" aria-valuemin="0"
+						aria-valuemax="100"></div>
+				</div>
 
 			</g:if>
 			<g:else>
@@ -49,30 +39,20 @@
 				</h3>
 
 				<h4>
-					${atividade.nome} - ${atividade.situacaoAtividade.nome}
+					${atividade.nome}
+					-
+					${atividade.situacaoAtividade.nome}
 					<small class="pull-right"> ${atividade.percentualConcluido}%
 					</small>
 				</h4>
 
-				<g:if test="${atividade.percentualConcluido > 50}">
-					<div class="progress xs">
-						<div class="progress-bar progress-bar-primary"
-							style="width: ${atividade.percentualConcluido}%"
-							role="progressbar"
-							aria-valuenow="${atividade.percentualConcluido}"
-							aria-valuemin="0" aria-valuemax="100"></div>
-					</div>
-				</g:if>
-				<g:else>
-					<div class="progress xs">
-						<div class="progress-bar progress-bar-danger"
-							style="width: ${atividade.percentualConcluido}%"
-							role="progressbar"
-							aria-valuenow="${atividade.percentualConcluido}"
-							aria-valuemin="0" aria-valuemax="100"></div>
-					</div>
-
-				</g:else>
+				<div class="progress xs">
+					<div class="progress-bar"
+						style="width: ${atividade.percentualConcluido}%; background-color: ${atividade.situacaoAtividade.cor}"
+						role="progressbar"
+						aria-valuenow="${atividade.percentualConcluido}" aria-valuemin="0"
+						aria-valuemax="100"></div>
+				</div>
 
 			</g:else>
 
