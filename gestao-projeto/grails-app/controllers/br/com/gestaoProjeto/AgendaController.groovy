@@ -54,6 +54,28 @@ class AgendaController {
 			}
 		}
 
-		render atividades as JSON
+		JSONArray eventos = new JSONArray()
+
+		for (atividade in atividades) {
+
+			JSONObject evento = new JSONObject()
+
+			evento.put("id", atividade.id)
+			evento.put("title", atividade.nome)
+			evento.put("start", atividade.dataInicio)
+			evento.put("end", atividade.dataFim)
+			evento.put("color", atividade.situacaoAtividade.cor)
+
+			eventos.add(evento)
+		}
+
+		render eventos as JSON
+	}
+
+	def getAtividade() {
+
+		Atividade atividade = Atividade.get(params.id)
+
+		render(template: "form", model:[atividade: atividade])
 	}
 }

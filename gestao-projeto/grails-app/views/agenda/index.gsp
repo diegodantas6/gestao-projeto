@@ -19,7 +19,6 @@
 <script
 	src="${createLink(uri: '/adminlte/plugins/fullcalendar-2.6.0/lang-all.js')}"></script>
 
-
 <script>
 	$(document).ready(function() {
 		$(".select2").select2();
@@ -30,12 +29,30 @@
 				center : 'title',
 				right : 'month,agendaWeek,agendaDay'
 			},
-			defaultDate : '2016-01-12',
 			lang : 'pt-br',
 			selectable : false,
 			selectHelper : false,
-			editable : false,
+			editable : true,
 			eventLimit : true,
+			eventClick : function(calEvent, jsEvent, view) {
+				
+				$.ajax({
+					method : "POST",
+					url : "agenda/getAtividade",
+					data : {
+						"id" : calEvent.id
+					},
+					success : function(data) {
+						$("#divCalendario").hide()
+						$("#divForm").show()
+						$("#divForm").html(data)
+					},
+					error : function(data) {
+						alert(data)
+					}
+				})
+				
+			}
 		});
 
 	})
@@ -73,21 +90,19 @@
 			data : 'idProjeto=' + idProjeto + '&idUsuario=' + idUsuario,
 			success : function(data) {
 
+				$('#divCalendar').fullCalendar('removeEvents')
+				
 				for (i = 0; i < data.length; i++) {
-					var obj = data[i]
-
-					var event = {
-						title: obj.nome,
-						start: obj.dataInicio,
-						end: obj.dataFim,
-						color: obj.situacaoAtividade.cor
-					}
-					
+					var event = data[i]
 					$('#divCalendar').fullCalendar('renderEvent', event, true)
-					
 				}
 			}
 		})
+	}
+
+	function voltar() {
+		$("#divCalendario").show()
+		$("#divForm").hide()
 	}
 
 </script>
@@ -98,7 +113,9 @@
 	<!-- Main content -->
 	<section class="content">
 
-		<div class="row">
+		<div id="divForm"></div>
+
+		<div class="row" id="divCalendario">
 
 			<g:render template="filtro" />
 
