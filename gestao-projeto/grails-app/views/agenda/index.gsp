@@ -32,13 +32,64 @@
 			},
 			defaultDate : '2016-01-12',
 			lang : 'pt-br',
-			selectable : true,
-			selectHelper : true,
-			editable : true,
+			selectable : false,
+			selectHelper : false,
+			editable : false,
 			eventLimit : true,
 		});
 
 	})
+
+	function onChangeProjeto() {
+		var id = $("#idProjeto").val()
+
+		$.ajax({
+			method : "POST",
+			url : "agenda/getUsuarios",
+			data : {
+				"idProjeto" : id
+			},
+			success : function(data) {
+
+				$("#idUsuario").find('option').remove().end().append('<option value="0">Todos</option>')
+
+				for (i = 0; i < data.length; i++) {
+					var obj = data[i]
+					$("#idUsuario").append($("<option></option>").attr("value", obj.id).text(obj.username))
+				}
+
+				$("#idUsuario").select2("val", "0");
+			}
+		})
+	}
+
+	function onChangeUsuario() {
+		var idProjeto = $("#idProjeto").val()
+		var idUsuario = $("#idUsuario").val()
+
+		$.ajax({
+			method : "POST",
+			url : "agenda/getAtividades",
+			data : 'idProjeto=' + idProjeto + '&idUsuario=' + idUsuario,
+			success : function(data) {
+
+				for (i = 0; i < data.length; i++) {
+					var obj = data[i]
+
+					var event = {
+						title: obj.nome,
+						start: obj.dataInicio,
+						end: obj.dataFim,
+						color: obj.situacaoAtividade.cor
+					}
+					
+					$('#divCalendar').fullCalendar('renderEvent', event, true)
+					
+				}
+			}
+		})
+	}
+
 </script>
 
 </head>

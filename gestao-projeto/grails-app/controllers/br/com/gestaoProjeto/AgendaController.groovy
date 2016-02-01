@@ -4,88 +4,56 @@ import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 
 import org.codehaus.groovy.grails.web.json.JSONArray
-import org.codehaus.groovy.grails.web.json.JSONObject;
+import org.codehaus.groovy.grails.web.json.JSONObject
+
+import br.com.controleAcesso.Usuario
 
 @Secured("IS_AUTHENTICATED_FULLY")
 class AgendaController {
 
 	def index() {
-		
 	}
-	
-	def getProjetos() {
 
-		//List projetos = Projeto.list(sort: "nome")
-		
-		List projetos = Projeto.createCriteria().list {
-			
-			situacaoProjeto {
-				
-				eq("exibeDashboard", true)
-				
-			}
-			
-			order("nome")
-			
+	def getUsuarios() {
+
+		List usuarios;
+
+		Long idProjeto = Long.valueOf( params.idProjeto )
+
+		if ( idProjeto.equals(0L) ) {
+
+			usuarios = Usuario.createCriteria().list { order("username") }
+		} else {
+
+			StringBuilder sql = new StringBuilder()
+
+			sql.append(" select distinct u				 ")
+			sql.append(" from Usuario u, Atividade a	 ")
+			sql.append(" where u.id = a.usuario			 ")
+			sql.append(" and   a.projeto.id = :idProjeto ")
+			sql.append(" order by u.username			 ")
+
+			usuarios = Usuario.executeQuery(sql.toString(), [idProjeto: idProjeto])
 		}
-		
-		JSONArray retorno = new JSONArray()
-		
-		for (projeto in projetos) {
-			
-			List atividades = Atividade.findAllByProjeto(projeto)
-			
-			int quantidade = 0
-			
-			int totalConcluido = 0
-			
-			int totalFaltando = 100
-			
-			for (atividade in atividades) {
-				
-				quantidade++
-				
-				totalConcluido += atividade.percentualConcluido
-				
-			}
-			
-			if (quantidade > 0) {
-				// calcula total concluido
-				totalConcluido = ( totalConcluido / quantidade )
-	
-				// calcula total faltando
-				totalFaltando -=  totalConcluido
-			}
 
-			JSONObject obj = new JSONObject()
-			
-			obj.put("id", projeto.id)
-			obj.put("nome", projeto.nome)
-			obj.put("concluido", totalConcluido)
-			obj.put("faltando", totalFaltando)
-
-			retorno.add(obj)
-			
-		}
-		
-		render(template: "projeto", model: [retorno: retorno])
+		render usuarios as JSON
 	}
-	
+
 	def getAtividades() {
-		
-		Long idProjeto = params.idProjeto
-		Long idUsuario = params.idUsuairo
-		
-		Projeto projeto = Projeto.get(params.id)
-		
+
+		Projeto projeto = Projeto.get( params.idProjeto )
+		Usuario usuario = Usuario.get( params.idUsuario )
+
 		List atividades = Atividade.createCriteria().list {
-			
-			eq("projeto", projeto)
-			
-			order("usuario", "nome")
-			
+			if (projeto) {
+				eq("projeto", projeto)
+			}
+
+			if (usuario) {
+				eq("usuario", usuario)
+			}
 		}
 
-		render(template: "atividade", model: [atividades: atividades, title: projeto.nome])
+		render atividades as JSON
 	}
 }
