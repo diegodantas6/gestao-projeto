@@ -83,8 +83,7 @@
 
 <body class="hold-transition skin-blue sidebar-mini">
 
-	<div id="spinner" style="display: none;">
-		<!-- <g:img uri="/images/spinner.gif" alt="Loading..." /> -->
+	<div id="spinner" class="modal">
 		<asset:image src="spinner.gif" alt="Loading..." />
 	</div>
 
@@ -239,6 +238,7 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 
+			<!-- Usando FADE
 			var showSpinner = function() {
 				$("#spinner").fadeIn('fast');
 			};
@@ -249,6 +249,28 @@
 			}).on("ajaxError", function(event, jqxhr, settings, exception) {
 				$("#spinner").hide();
 			});
+			-->
+
+			<!-- Usando MODAL -->
+			var showSpinner = function() {
+				$("#spinner").dialog({
+					modal : true,
+					width : 'auto',
+					resizable : false,
+					draggable: false,
+					closeOnEscape: false
+				});
+
+				$(".ui-dialog-titlebar").hide();
+			};
+
+			var closeSpinner = function() {
+				$("#spinner").dialog("close");
+			}
+
+			// Global handlers for AJAX events
+			$(document).on("ajaxSend", showSpinner).on("ajaxStop", closeSpinner).on("ajaxError", closeSpinner);
+			
 		});
 
 		function customConfirm(message, yesFunc, noFunc) {

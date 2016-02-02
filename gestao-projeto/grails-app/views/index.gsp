@@ -38,8 +38,6 @@
 <!-- Bootstrap 3.3.5 -->
 <script
 	src="${createLink(uri: '/adminlte/bootstrap/js/bootstrap.min.js')}"></script>
-<!-- AdminLTE App -->
-<script src="${createLink(uri: '/adminlte/dist/js/app.min.js')}"></script>
 
 </head>
 
