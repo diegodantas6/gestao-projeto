@@ -1,122 +1,171 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta name="layout" content="main"/>
-		<title>Welcome to Grails</title>
-		<style type="text/css" media="screen">
-			#status {
-				background-color: #eee;
-				border: .2em solid #fff;
-				margin: 2em 2em 1em;
-				padding: 1em;
-				width: 12em;
-				float: left;
-				-moz-box-shadow: 0px 0px 1.25em #ccc;
-				-webkit-box-shadow: 0px 0px 1.25em #ccc;
-				box-shadow: 0px 0px 1.25em #ccc;
-				-moz-border-radius: 0.6em;
-				-webkit-border-radius: 0.6em;
-				border-radius: 0.6em;
-			}
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>AdminLTE 2 | Starter</title>
+<link rel="shortcut icon" href="${assetPath(src: 'favicon.ico')}"
+	type="image/x-icon">
 
-			.ie6 #status {
-				display: inline; /* float double margin fix http://www.positioniseverything.net/explorer/doubled-margin.html */
-			}
+<!-- Tell the browser to be responsive to screen width -->
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport">
 
-			#status ul {
-				font-size: 0.9em;
-				list-style-type: none;
-				margin-bottom: 0.6em;
-				padding: 0;
-			}
+<!-- Reset -->
+<link rel="stylesheet"
+	href="${createLink(uri: '/adminlte/plugins/reset/html5-reset.css')}">
+<!-- Bootstrap 3.3.5 -->
+<link rel="stylesheet"
+	href="${createLink(uri: '/adminlte/bootstrap/css/bootstrap.min.css')}">
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet"
+	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- Custom CSS -->
+<asset:stylesheet src="institucional.css" />
 
-			#status li {
-				line-height: 1.3;
-			}
+<!-- REQUIRED JS SCRIPTS -->
 
-			#status h1 {
-				text-transform: uppercase;
-				font-size: 1.1em;
-				margin: 0 0 0.3em;
-			}
+<!-- jQuery 2.1.4 -->
+<script
+	src="${createLink(uri: '/adminlte/plugins/jQuery/jQuery-2.1.4.min.js')}"></script>
+<!-- jQueryUI -->
+<script
+	src="${createLink(uri: '/adminlte/plugins/jQueryUI/jquery-ui.min.js')}"></script>
+<!-- Bootstrap 3.3.5 -->
+<script
+	src="${createLink(uri: '/adminlte/bootstrap/js/bootstrap.min.js')}"></script>
+<!-- AdminLTE App -->
+<script src="${createLink(uri: '/adminlte/dist/js/app.min.js')}"></script>
 
-			#page-body {
-				margin: 2em 1em 1.25em 18em;
-			}
+</head>
 
-			h2 {
-				margin-top: 1em;
-				margin-bottom: 0.3em;
-				font-size: 1em;
-			}
+<body>
 
-			p {
-				line-height: 1.5;
-				margin: 0.25em 0;
-			}
-
-			#controller-list ul {
-				list-style-position: inside;
-			}
-
-			#controller-list li {
-				line-height: 1.3;
-				list-style-position: inside;
-				margin: 0.25em 0;
-			}
-
-			@media screen and (max-width: 480px) {
-				#status {
-					display: none;
-				}
-
-				#page-body {
-					margin: 0 1em 1em;
-				}
-
-				#page-body h1 {
-					margin-top: 0;
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div id="status" role="complementary">
-			<h1>Application Status</h1>
-			<ul>
-				<li>App version: <g:meta name="app.version"/></li>
-				<li>Grails version: <g:meta name="app.grails.version"/></li>
-				<li>Groovy version: ${GroovySystem.getVersion()}</li>
-				<li>JVM version: ${System.getProperty('java.version')}</li>
-				<li>Reloading active: ${grails.util.Environment.reloadingAgentEnabled}</li>
-				<li>Controllers: ${grailsApplication.controllerClasses.size()}</li>
-				<li>Domains: ${grailsApplication.domainClasses.size()}</li>
-				<li>Services: ${grailsApplication.serviceClasses.size()}</li>
-				<li>Tag Libraries: ${grailsApplication.tagLibClasses.size()}</li>
-			</ul>
-			<h1>Installed Plugins</h1>
-			<ul>
-				<g:each var="plugin" in="${applicationContext.getBean('pluginManager').allPlugins}">
-					<li>${plugin.name} - ${plugin.version}</li>
-				</g:each>
-			</ul>
-		</div>
-		<div id="page-body" role="main">
-			<h1>Welcome to Grails</h1>
-			<p>Congratulations, you have successfully started your first Grails application! At the moment
-			   this is the default page, feel free to modify it to either redirect to a controller or display whatever
-			   content you may choose. Below is a list of controllers that are currently deployed in this application,
-			   click on each to execute its default action:</p>
-
-			<div id="controller-list" role="navigation">
-				<h2>Available Controllers:</h2>
-				<ul>
-					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-						<li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
-					</g:each>
+	<!-- Navigation -->
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Start Bootstrap</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><a href="#">About</a></li>
+					<li><a href="#">Services</a></li>
+					<li><a href="#">Contact</a></li>
+					<li><a href="${createLink(controller: 'login')}">Login</a></li>
 				</ul>
 			</div>
+			<!-- /.navbar-collapse -->
 		</div>
-	</body>
+		<!-- /.container -->
+	</nav>
+
+	<!-- Image Background Page Header -->
+	<!-- Note: The background image is set within the business-casual.css file. -->
+	<header class="business-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="tagline">Business Name or Tagline</h1>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<!-- Page Content -->
+	<div class="container">
+
+		<hr>
+
+		<div class="row">
+			<div class="col-sm-8">
+				<h2>What We Do</h2>
+				<p>Introduce the visitor to the business using clear,
+					informative text. Use well-targeted keywords within your sentences
+					to make sure search engines can find the business.</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et
+					molestiae similique eligendi reiciendis sunt distinctio odit? Quia,
+					neque, ipsa, adipisci quisquam ullam deserunt accusantium illo iste
+					exercitationem nemo voluptates asperiores.</p>
+				<p>
+					<a class="btn btn-default btn-lg" href="#">Call to Action
+						&raquo;</a>
+				</p>
+			</div>
+			<div class="col-sm-4">
+				<h2>Contact Us</h2>
+				<address>
+					<strong>Start Bootstrap</strong> <br>3481 Melrose Place <br>Beverly
+					Hills, CA 90210 <br>
+				</address>
+				<address>
+					<abbr title="Phone">P:</abbr>(123) 456-7890 <br> <abbr
+						title="Email">E:</abbr> <a href="mailto:#">name@example.com</a>
+				</address>
+			</div>
+		</div>
+		<!-- /.row -->
+
+		<hr>
+
+		<div class="row">
+			<div class="col-sm-4">
+				<img class="img-circle img-responsive img-center"
+					src="http://placehold.it/300x300" alt="">
+				<h2>Marketing Box #1</h2>
+				<p>These marketing boxes are a great place to put some
+					information. These can contain summaries of what the company does,
+					promotional information, or anything else that is relevant to the
+					company. These will usually be below-the-fold.</p>
+			</div>
+			<div class="col-sm-4">
+				<img class="img-circle img-responsive img-center"
+					src="http://placehold.it/300x300" alt="">
+				<h2>Marketing Box #2</h2>
+				<p>The images are set to be circular and responsive. Fusce
+					dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
+					ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
+					magna mollis euismod. Donec sed odio dui.</p>
+			</div>
+			<div class="col-sm-4">
+				<img class="img-circle img-responsive img-center"
+					src="http://placehold.it/300x300" alt="">
+				<h2>Marketing Box #3</h2>
+				<p>Donec id elit non mi porta gravida at eget metus. Fusce
+					dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
+					ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
+					magna mollis euismod. Donec sed odio dui.</p>
+			</div>
+		</div>
+		<!-- /.row -->
+
+		<hr>
+
+		<!-- Footer -->
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>Copyright &copy; Your Website 2014</p>
+				</div>
+			</div>
+			<!-- /.row -->
+		</footer>
+
+	</div>
+	<!-- /.container -->
+
+</body>
 </html>

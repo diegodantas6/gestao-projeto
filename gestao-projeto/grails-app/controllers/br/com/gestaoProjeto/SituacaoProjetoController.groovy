@@ -45,6 +45,8 @@ class SituacaoProjetoController {
 	}
 
 	def salvar(SituacaoProjeto situacaoProjeto) {
+		
+		Thread.sleep(10 * 1000)
 
 		def retorno
 

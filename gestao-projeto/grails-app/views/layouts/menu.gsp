@@ -42,6 +42,8 @@
 <!-- Skin - blue -->
 <link rel="stylesheet"
 	href="${createLink(uri: '/adminlte/dist/css/skins/skin-blue.min.css')}">
+<!-- Custom CSS -->
+<asset:stylesheet src="custom.css" />
 
 <!-- REQUIRED JS SCRIPTS -->
 
@@ -80,6 +82,12 @@
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
+
+	<div id="spinner" style="display: none;">
+		<!-- <g:img uri="/images/spinner.gif" alt="Loading..." /> -->
+		<asset:image src="spinner.gif" alt="Loading..." />
+	</div>
+
 	<div class="wrapper">
 
 		<!-- Main Header -->
@@ -229,6 +237,20 @@
 	<!-- ./wrapper -->
 
 	<script type="text/javascript">
+		$(document).ready(function() {
+
+			var showSpinner = function() {
+				$("#spinner").fadeIn('fast');
+			};
+
+			// Global handlers for AJAX events
+			$(document).on("ajaxSend", showSpinner).on("ajaxStop", function() {
+				$("#spinner").fadeOut('fast');
+			}).on("ajaxError", function(event, jqxhr, settings, exception) {
+				$("#spinner").hide();
+			});
+		});
+
 		function customConfirm(message, yesFunc, noFunc) {
 			//DOC: http://craftpip.github.io/jquery-confirm/
 			$.confirm({
