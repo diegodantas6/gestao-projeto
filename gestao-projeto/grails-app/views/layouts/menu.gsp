@@ -33,9 +33,6 @@
 <!-- Select2 -->
 <link rel="stylesheet"
 	href="${createLink(uri: '/adminlte/plugins/select2/select2.min.css')}">
-<!-- jQueryUI -->
-<link rel="stylesheet"
-	href="${createLink(uri: '/adminlte/plugins/jQueryUI/jquery-ui.min.css')}">
 <!-- Theme style -->
 <link rel="stylesheet"
 	href="${createLink(uri: '/adminlte/dist/css/AdminLTE.min.css')}">
@@ -265,7 +262,12 @@
 			};
 
 			var closeSpinner = function() {
-				$("#spinner").dialog("close");
+				var isOpen = $( "#spinner" ).dialog( "isOpen" );
+
+				if ( isOpen ) {
+					$("#spinner").dialog("close");
+				}
+				
 			}
 
 			// Global handlers for AJAX events
