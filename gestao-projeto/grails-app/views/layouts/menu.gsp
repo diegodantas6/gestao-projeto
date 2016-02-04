@@ -81,7 +81,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 
 	<div id="spinner" class="modal">
-		<asset:image src="spinner.gif" alt="Loading..." />
+		<asset:image src="spinner3.gif" alt="Loading..." />
 	</div>
 
 	<div class="wrapper">
@@ -233,21 +233,9 @@
 	<!-- ./wrapper -->
 
 	<script type="text/javascript">
+
 		$(document).ready(function() {
-
-			<!-- Usando FADE
-			var showSpinner = function() {
-				$("#spinner").fadeIn('fast');
-			};
-
-			// Global handlers for AJAX events
-			$(document).on("ajaxSend", showSpinner).on("ajaxStop", function() {
-				$("#spinner").fadeOut('fast');
-			}).on("ajaxError", function(event, jqxhr, settings, exception) {
-				$("#spinner").hide();
-			});
-			-->
-
+			
 			<!-- Usando MODAL -->
 			var showSpinner = function() {
 				$("#spinner").dialog({
@@ -255,26 +243,22 @@
 					width : 'auto',
 					resizable : false,
 					draggable: false,
-					closeOnEscape: false
+					closeOnEscape: false,
+					autoOpen: false
 				});
-
+		
 				$(".ui-dialog-titlebar").hide();
 			};
-
+		
 			var closeSpinner = function() {
-				var isOpen = $( "#spinner" ).dialog( "isOpen" );
-
-				if ( isOpen ) {
-					$("#spinner").dialog("close");
-				}
-				
+				$("#spinner").dialog("close");
 			}
-
+		
 			// Global handlers for AJAX events
 			$(document).on("ajaxSend", showSpinner).on("ajaxStop", closeSpinner).on("ajaxError", closeSpinner);
 			
 		});
-
+	
 		function customConfirm(message, yesFunc, noFunc) {
 			//DOC: http://craftpip.github.io/jquery-confirm/
 			$.confirm({
