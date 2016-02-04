@@ -8,38 +8,39 @@
 	src="${createLink(uri: '/adminlte/plugins/chartjs/Chart.min.js')}"></script>
 
 <script>
-$(document).ready(function() {
-	getProjetos()
-})
+	function iniciaForm() {
 
-function getProjetos() {
-	$.ajax({
-		method : "POST",
-		url : "dashboard/getProjetos",
-		data : {},
-		success : function(data) {
-			$("#divConteudo").html(data)
-		}
-	})
-}
+		getProjetos()
 
-function getAtividades(id) {
-	$.ajax({
-		method : "POST",
-		url : "dashboard/getAtividades",
-		data : {
-			"id" : id
-		},
-		success : function(data) {
-			$("#divConteudo").html(data)
-		}
-	})
-}
+	}
 
-function voltar() {
-	getProjetos()
-}
+	function getProjetos() {
+		$.ajax({
+			method : "POST",
+			url : "dashboard/getProjetos",
+			data : {},
+			success : function(data) {
+				$("#divConteudo").html(data)
+			}
+		})
+	}
 
+	function getAtividades(id) {
+		$.ajax({
+			method : "POST",
+			url : "dashboard/getAtividades",
+			data : {
+				"id" : id
+			},
+			success : function(data) {
+				$("#divConteudo").html(data)
+			}
+		})
+	}
+
+	function voltar() {
+		getProjetos()
+	}
 </script>
 
 </head>

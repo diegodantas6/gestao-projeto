@@ -10,13 +10,13 @@
 <meta name="layout" content="menu">
 
 <script type="text/javascript">
-	$(document).ready(function() {
+	function iniciaForm() {
 
 		$("#grupoUsuario").select2();
 
 		carregaTreeView();
 
-	});
+	}
 
 	function retornoSalvar(data) {
 		$.notify(data.mensagem, data.type);

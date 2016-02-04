@@ -2,9 +2,11 @@
  * Script criado para atender os cadastros padroes
  */
 
-$(document).ready(function() {
+function iniciaForm() {
+	
 	carregarLista()
-})
+	
+}
 
 function carregarLista() {
 	$("#divForm").hide()

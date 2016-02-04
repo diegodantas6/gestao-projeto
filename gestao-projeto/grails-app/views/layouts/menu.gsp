@@ -236,6 +236,14 @@
 
 		$(document).ready(function() {
 			
+			iniciaAjax()
+			
+			iniciaForm()
+	
+		})
+	
+		function iniciaAjax() {
+
 			<!-- Usando MODAL -->
 			var showSpinner = function() {
 				$("#spinner").dialog({
@@ -254,10 +262,10 @@
 			}
 		
 			// Global handlers for AJAX events
-			//$(document).on("ajaxSend", showSpinner).on("ajaxStop", closeSpinner).on("ajaxError", closeSpinner);
-			
-		});
-	
+			$(document).on("ajaxSend", showSpinner).on("ajaxStop", closeSpinner).on("ajaxError", closeSpinner);
+
+		}
+		
 		function customConfirm(message, yesFunc, noFunc) {
 			//DOC: http://craftpip.github.io/jquery-confirm/
 			$.confirm({

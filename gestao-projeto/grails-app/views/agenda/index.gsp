@@ -20,7 +20,8 @@
 	src="${createLink(uri: '/adminlte/plugins/fullcalendar-2.6.0/lang-all.js')}"></script>
 
 <script>
-	$(document).ready(function() {
+	function iniciaForm() {
+
 		$(".select2").select2();
 
 		$('#divCalendar').fullCalendar({
@@ -35,7 +36,7 @@
 			editable : true,
 			eventLimit : true,
 			eventClick : function(calEvent, jsEvent, view) {
-				
+
 				$.ajax({
 					method : "POST",
 					url : "agenda/getAtividade",
@@ -51,11 +52,11 @@
 						alert(data)
 					}
 				})
-				
+
 			}
 		});
 
-	})
+	}
 
 	function onChangeProjeto() {
 		var id = $("#idProjeto").val()
@@ -68,11 +69,14 @@
 			},
 			success : function(data) {
 
-				$("#idUsuario").find('option').remove().end().append('<option value="0">Todos</option>')
+				$("#idUsuario").find('option').remove().end().append(
+						'<option value="0">Todos</option>')
 
 				for (i = 0; i < data.length; i++) {
 					var obj = data[i]
-					$("#idUsuario").append($("<option></option>").attr("value", obj.id).text(obj.username))
+					$("#idUsuario").append(
+							$("<option></option>").attr("value", obj.id).text(
+									obj.username))
 				}
 
 				$("#idUsuario").select2("val", "0");
@@ -91,7 +95,7 @@
 			success : function(data) {
 
 				$('#divCalendar').fullCalendar('removeEvents')
-				
+
 				for (i = 0; i < data.length; i++) {
 					var event = data[i]
 					$('#divCalendar').fullCalendar('renderEvent', event, true)
@@ -106,9 +110,8 @@
 		$("#divForm").hide()
 
 		$(".select2").select2()
-		
-	}
 
+	}
 </script>
 
 </head>

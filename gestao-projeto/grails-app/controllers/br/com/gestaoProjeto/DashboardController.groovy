@@ -14,7 +14,7 @@ class DashboardController {
 	}
 	
 	def getProjetos() {
-
+		
 		//List projetos = Projeto.list(sort: "nome")
 		
 		List projetos = Projeto.createCriteria().list {

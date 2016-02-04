@@ -9,5 +9,11 @@
 	<section class="content"></section>
 	<!-- /.content -->
 
+	<script type="text/javascript">
+		function iniciaForm() {
+
+		}
+	</script>
+
 </body>
 </html>
