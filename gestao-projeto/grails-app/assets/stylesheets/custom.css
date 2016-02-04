@@ -18,3 +18,7 @@
 .jconfirm-box-container .content {
 	min-height: auto;
 }
+
+.pull-right {
+	margin-left: 5px;
+}

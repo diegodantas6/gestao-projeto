@@ -243,8 +243,7 @@
 					width : 'auto',
 					resizable : false,
 					draggable: false,
-					closeOnEscape: false,
-					autoOpen: false
+					closeOnEscape: false
 				});
 		
 				$(".ui-dialog-titlebar").hide();
@@ -255,7 +254,7 @@
 			}
 		
 			// Global handlers for AJAX events
-			$(document).on("ajaxSend", showSpinner).on("ajaxStop", closeSpinner).on("ajaxError", closeSpinner);
+			//$(document).on("ajaxSend", showSpinner).on("ajaxStop", closeSpinner).on("ajaxError", closeSpinner);
 			
 		});
 	
