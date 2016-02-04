@@ -46,8 +46,6 @@ class SituacaoProjetoController {
 
 	def salvar(SituacaoProjeto situacaoProjeto) {
 		
-		Thread.sleep(5 * 1000)
-
 		def retorno
 
 		if (params.situacaoProjeto.id) {
