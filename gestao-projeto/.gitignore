@@ -38,6 +38,7 @@
 /target/work/plugin-provided-classes
 /target/work/resources
 /target/work/tomcat
+/target/work/scriptCache
 
 /.classpath
 /.project
