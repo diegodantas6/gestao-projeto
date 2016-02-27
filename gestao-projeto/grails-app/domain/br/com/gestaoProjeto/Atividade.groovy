@@ -12,6 +12,8 @@ class Atividade {
 	Usuario usuario
 	SituacaoAtividade situacaoAtividade
 
+	static hasMany = [comentarios: AtividadeComentario]
+	
     static constraints = {
 		nome blank: false, unique: true
 		dataInicio blank: false 

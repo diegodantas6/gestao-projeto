@@ -122,4 +122,48 @@ class AtividadeController {
 
 		render retorno as JSON
 	}
+	
+	def salvarComentario(AtividadeComentario atividadeComentario) {
+		
+		def retorno
+		
+		try {
+			
+			atividadeComentario.data = new Date()
+			
+			atividadeComentario.save(flush:true)
+	
+			retorno = UtilsMensagem.getMensagem("Salvo com sucesso!", NotifyType.SUCCESS)
+			
+			atividadeComentario.atividade.refresh()
+	
+		} catch(Exception e) {
+		
+			retorno = UtilsMensagem.getMensagem("Não foi possível salvar!", NotifyType.ERROR, atividadeComentario.errors)
+		
+		} 
+		
+		render retorno as JSON
+		
+	}
+
+	def excluirComentario() {
+
+		def retorno
+
+		try {
+			
+			AtividadeComentario atividadeComentario = AtividadeComentario.get(params.id)
+
+			atividadeComentario.delete(flush:true)
+
+			retorno = UtilsMensagem.getMensagem("Excluido com sucesso!", NotifyType.SUCCESS)
+		} catch(Exception e) {
+
+			retorno = UtilsMensagem.getMensagem("Não foi possível excluir!", NotifyType.ERROR)
+		}
+
+		render retorno as JSON
+	}
+			
 }

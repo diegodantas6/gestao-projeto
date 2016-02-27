@@ -6,6 +6,70 @@
 <!-- CRUD -->
 <asset:javascript src="crud.js"/>
 
+<script type="text/javascript">
+
+function retornoSalvarComentario(data) {
+
+	$.notify(data.mensagem, data.type)
+
+	if (data.type == "success") {
+		
+		//$("#divFormComentario").html("")
+		
+	} else {
+		for (i = 0; i < data.errors.errors.length; i++) {
+			var text = data.errors.errors[i].message
+
+			$.notify(text, data.type);
+		}
+	}
+
+}
+
+function alterarComentario(id) {
+	$.ajax({
+		method : "POST",
+		url : "alterar",
+		data : {
+			"id" : id
+		},
+		success : function(data) {
+			$("#divFormLista").hide()
+			$("#divForm").show()
+			$("#divForm").html(data)
+		},
+		error : function(data) {
+			retornoErro(data)
+		}
+	})
+}
+
+function excluirComentario(id) {
+	customConfirm('Deseja realmente excluir?', function() {
+		$.ajax({
+			method : "POST",
+			url : "excluirComentario",
+			data : {
+				"id" : id
+			},
+			success : function(data) {
+
+				$.notify(data.mensagem, data.type);
+
+				//if (data.type == "success") {
+					//carregarLista()
+				//}
+			},
+			error : function(data) {
+				retornoErro(data)
+			}
+		})
+	}, function() {
+	});
+}
+
+</script>
+
 </head>
 <body>
 	<!-- Content Header (Page header) -->
