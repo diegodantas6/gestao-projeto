@@ -42,7 +42,9 @@
 <script>
 	$(function() {
 
-		$('#tabela').DataTable();
+		$('#tabela').DataTable({
+			"scrollX": true
+		});
 
 	});
 </script>
